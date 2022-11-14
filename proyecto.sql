@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2022 a las 04:48:57
+-- Tiempo de generación: 14-11-2022 a las 15:10:00
 -- Versión del servidor: 10.4.25-MariaDB
--- Versión de PHP: 8.1.10
+-- Versión de PHP: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -52,6 +52,40 @@ CREATE TABLE `alumno` (
 INSERT INTO `alumno` (`alumno_id`, `alumno_nombre`, `usuario_id`) VALUES
 (1, 'Maximiliano Lugo Zavala', 4),
 (2, 'Filomeno Segundo Lopez', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `alumno_has_materia`
+--
+
+CREATE TABLE `alumno_has_materia` (
+  `cal_prim` float NOT NULL,
+  `cal_seg` float NOT NULL,
+  `cal_terc` float NOT NULL,
+  `cal_final` float NOT NULL,
+  `alumno_id` int(11) NOT NULL,
+  `alumno_usuario` int(11) NOT NULL,
+  `materia_id` int(11) NOT NULL,
+  `maestro_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `alumno_has_tarea`
+--
+
+CREATE TABLE `alumno_has_tarea` (
+  `alumno_id` int(11) NOT NULL,
+  `alumno_usuario_id` int(11) NOT NULL,
+  `tarea_id` int(11) NOT NULL,
+  `maestro_id` int(11) NOT NULL,
+  `tarea_status` varchar(45) NOT NULL,
+  `tarea_calif` int(11) NOT NULL,
+  `tarea_entrega` datetime NOT NULL,
+  `materia_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -121,6 +155,20 @@ INSERT INTO `rol` (`rol_id`, `rol_nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tarea`
+--
+
+CREATE TABLE `tarea` (
+  `tarea_id` int(11) NOT NULL,
+  `tarea_nombre` varchar(45) NOT NULL,
+  `tarea_desc` varchar(100) NOT NULL,
+  `tarea_limite` datetime NOT NULL,
+  `maestro_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -180,6 +228,25 @@ ALTER TABLE `alumno`
   ADD KEY `usuario_id` (`usuario_id`);
 
 --
+-- Indices de la tabla `alumno_has_materia`
+--
+ALTER TABLE `alumno_has_materia`
+  ADD KEY `alumno_id` (`alumno_id`,`alumno_usuario`,`materia_id`,`maestro_id`),
+  ADD KEY `alumno_usuario` (`alumno_usuario`),
+  ADD KEY `materia_id` (`materia_id`),
+  ADD KEY `maestro_id` (`maestro_id`);
+
+--
+-- Indices de la tabla `alumno_has_tarea`
+--
+ALTER TABLE `alumno_has_tarea`
+  ADD KEY `alumno_id` (`alumno_id`,`alumno_usuario_id`,`tarea_id`,`maestro_id`,`materia_id`),
+  ADD KEY `alumno_usuario_id` (`alumno_usuario_id`),
+  ADD KEY `tarea_id` (`tarea_id`),
+  ADD KEY `maestro_id` (`maestro_id`),
+  ADD KEY `materia_id` (`materia_id`);
+
+--
 -- Indices de la tabla `maestro`
 --
 ALTER TABLE `maestro`
@@ -207,6 +274,13 @@ ALTER TABLE `padres_id`
 --
 ALTER TABLE `rol`
   ADD PRIMARY KEY (`rol_id`);
+
+--
+-- Indices de la tabla `tarea`
+--
+ALTER TABLE `tarea`
+  ADD PRIMARY KEY (`tarea_id`),
+  ADD KEY `maestro_id` (`maestro_id`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -263,6 +337,12 @@ ALTER TABLE `rol`
   MODIFY `rol_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `tarea`
+--
+ALTER TABLE `tarea`
+  MODIFY `tarea_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -285,6 +365,25 @@ ALTER TABLE `alumno`
   ADD CONSTRAINT `alumno_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`usuarios_id`) ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `alumno_has_materia`
+--
+ALTER TABLE `alumno_has_materia`
+  ADD CONSTRAINT `alumno_has_materia_ibfk_1` FOREIGN KEY (`alumno_id`) REFERENCES `alumno` (`alumno_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `alumno_has_materia_ibfk_2` FOREIGN KEY (`alumno_usuario`) REFERENCES `alumno` (`usuario_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `alumno_has_materia_ibfk_3` FOREIGN KEY (`materia_id`) REFERENCES `materia` (`materia_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `alumno_has_materia_ibfk_4` FOREIGN KEY (`maestro_id`) REFERENCES `maestro` (`maestro_id`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `alumno_has_tarea`
+--
+ALTER TABLE `alumno_has_tarea`
+  ADD CONSTRAINT `alumno_has_tarea_ibfk_1` FOREIGN KEY (`alumno_id`) REFERENCES `alumno` (`alumno_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `alumno_has_tarea_ibfk_2` FOREIGN KEY (`alumno_usuario_id`) REFERENCES `alumno` (`usuario_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `alumno_has_tarea_ibfk_3` FOREIGN KEY (`tarea_id`) REFERENCES `tarea` (`tarea_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `alumno_has_tarea_ibfk_4` FOREIGN KEY (`maestro_id`) REFERENCES `maestro` (`maestro_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `alumno_has_tarea_ibfk_5` FOREIGN KEY (`materia_id`) REFERENCES `materia` (`materia_id`) ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `maestro`
 --
 ALTER TABLE `maestro`
@@ -301,6 +400,12 @@ ALTER TABLE `materia`
 --
 ALTER TABLE `padres_id`
   ADD CONSTRAINT `padres_id_ibfk_1` FOREIGN KEY (`padre_usuario_id`) REFERENCES `usuarios` (`usuarios_id`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `tarea`
+--
+ALTER TABLE `tarea`
+  ADD CONSTRAINT `tarea_ibfk_1` FOREIGN KEY (`maestro_id`) REFERENCES `maestro` (`maestro_id`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuarios`
