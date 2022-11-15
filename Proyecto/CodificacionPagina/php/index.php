@@ -16,6 +16,7 @@
       <img src="/Proyecto/CodificacionPagina/rsc/iupiiz-logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
       <span class="navbar-brand mb-0 h1">Sistema de Consulta Escolar</span>
     </a>
+    <a class="nav-link" href="login.html">Inicio de Sesion</a>
   </nav>
     <div class="container">
         <div class="row">
