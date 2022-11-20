@@ -28,13 +28,43 @@
               <a class="nav-link" href="#">Calificaciones</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"></a>
+              <a class="nav-link" href="#">Horario</a>
             </li>
             <li class="nav-item">
-              
+              <a class="nav-link" href="#">Maestros</a>
             </li>
           </ul>
     </div>
       </nav>
+      <header id="page-header" class="row">
+        <div class="col-12 pt-3 pb-3">
+            <div class="card ">
+                <div class="card-body ">
+                    <div class="d-sm-flex align-items-center">
+                        <div class="mr-auto">
+                            <div class="page-context-header"><div class="page-header-headings"><h1>Escuela Mundo Educativo</h1></div></div>
+                        </div>
+        
+                        <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
+                        </div>
+                    </div>
+                    <div class="d-flex flex-wrap">
+                        <div class="ml-auto d-flex">
+                            
+                        </div>
+                        <div id="course-header">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+<div class="col">
+    <div id="page" class="container-fluid d-print-block">
+        <div class="card"><img src="/Proyecto/CodificacionPagina/rsc/Banner Mundo E.png" width="1305" height="400"></div>
+    </div>
+</div>
+        </header>
 </body>
 </html>
