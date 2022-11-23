@@ -1,3 +1,77 @@
+<?php
+    include_once 'database.php';
+    
+    session_start();
+
+    if(isset($_GET['cerrar_sesion'])){
+        session_unset(); 
+
+        // destroy the session 
+        session_destroy(); 
+    }
+    
+    if(isset($_SESSION['rol'])){
+      switch($_SESSION['rol']){
+        case 1:
+            header('location: admin.php');
+        break;
+
+        case 2:
+        header('location: maestroindex.php');
+        break;
+
+        case 3:
+          header('location: /alumno/alumnoindex.php');
+          break;
+
+          case 4:
+            header('location: colab.php');
+            break;
+        default:
+    }
+
+    if(isset($_POST['usuario']) && isset($_POST['pass'])){
+        $username = $_POST['usuario'];
+        $password = $_POST['pass'];
+
+        $db = new Database();
+        $query = $db->connect()->prepare('SELECT *FROM usuarios WHERE usuarios_nombre = :usuario AND usuarios_pass = :pass');
+        $query->execute(['usuario' => $username, 'pass' => $password]);
+
+        $row = $query->fetch(PDO::FETCH_NUM);
+        
+        if($row == true){
+            $rol = $row[3];
+            
+            $_SESSION['rol'] = $rol;
+            switch($rol){
+              case 1:
+                header('location: admin.php');
+            break;
+    
+            case 2:
+            header('location: maestroindex.php');
+            break;
+    
+            case 3:
+              header('location: indexalumno.php');
+              break;
+    
+              case 4:
+                header('location: colab.php');
+                break;
+            default:
+            }
+        }else{
+            // no existe el usuario
+            echo "Nombre de usuario o contraseña incorrecto";
+        }
+        
+
+    }
+
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,25 +86,25 @@
 <body>
     <!-- Image and text -->
 <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="index.html">
-      <img src="/Proyecto/CodificacionPagina/rsc/Mundo Educativo.png" width="40" height="40" class="d-inline-block align-top" alt="">
+    <a class="navbar-brand" href="/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/">
+      <img src="/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/rsc/Mundo Educativo.png" width="40" height="40" class="d-inline-block align-top" alt="">
       <span class="navbar-brand mb-0 h1">Sistema de Consulta Escolar</span>
     </a>
   </nav>
 <div class="container">
     <div class="row">
         <div class="col-lg-1"></div>
-        <div class="col"><form>
+        <div class="col"><form action="#" method="POST">
             <!-- Email input -->
             <div class="form-outline mb-4">
-                <label class="form-label" for="form2Example1">Email address</label>
-              <input type="email" id="form2Example1" class="form-control" />
+                <label class="form-label" for="usuario">Usuario</label>
+              <input type="user" id="usuario" class="form-control" />
             </div>
           
             <!-- Password input -->
             <div class="form-outline mb-4">
-                <label class="form-label" for="form2Example2">Password</label>
-              <input type="password" id="form2Example2" class="form-control" />
+                <label class="form-label" for="pass">Contrasena</label>
+              <input type="password" id="pass" class="form-control" />
             </div>
           
             <!-- 2 column grid layout for inline styling -->
@@ -41,7 +115,7 @@
             </div>
           
             <!-- Submit button -->
-            <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+            <button type="submit" class="btn btn-primary btn-block mb-4">Iniciar Sesion</button>
           
 </div>
 </body>
