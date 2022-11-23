@@ -1,17 +1,3 @@
-<?php
-
-    session_start();
-
-    if(!isset($_SESSION['rol'])){
-        header('location: login.php');
-    }else{
-        if($_SESSION['rol'] != 3){
-            header('location: login.php');
-        }
-    }
-
-
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -27,8 +13,8 @@
     <nav class="navbar bg-light">
         <div class="col">
         <div class="container-fluid">
-          <a class="navbar-brand" href="alumno.html">
-            <img src="/Proyecto/CodificacionPagina/rsc/Mundo Educativo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+          <a class="navbar-brand" href="/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/">
+            <img src="/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/rsc/Mundo Educativo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
             Escuela Mundo Educativo
           </a>
         </div>
@@ -46,6 +32,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Maestros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Cerrar Sesion</a>
             </li>
           </ul>
     </div>
@@ -76,7 +65,7 @@
         </div>
 <div class="col">
     <div id="page" class="container-fluid d-print-block">
-        <div class="card"><img src="/Proyecto/CodificacionPagina/rsc/Banner Mundo E.png" width="1305" height="400"></div>
+        <div class="card"><img src="/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/rsc/Banner Mundo E.png" width="1305" height="400"></div>
     </div>
 </div>
         </header>

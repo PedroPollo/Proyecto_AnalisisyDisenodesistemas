@@ -1,74 +1,68 @@
 <?php
-    include_once 'database.php';
-    
-    session_start();
+include_once 'conexion_bd.php';
 
-    if(isset($_GET['cerrar_sesion'])){
-        session_unset(); 
+session_start();
 
-        // destroy the session 
-        session_destroy(); 
-    }
-    
-    if(isset($_SESSION['rol'])){
-      switch($_SESSION['rol']){
+if(isset($_SESSION['rol'])){
+    switch($_SESSION['rol']){
         case 1:
-            header('location: admin.php');
+            header('location: indexadmin.php');
         break;
 
         case 2:
-        header('location: maestroindex.php');
+        header('location: indexmaestros.php');
         break;
 
         case 3:
-          header('location: /alumno/alumnoindex.php');
+          header('location: indexalumno.php');
           break;
 
-          case 4:
-            header('location: colab.php');
-            break;
+        case 4:
+          header('location: indexpadres.php');
+          break;
+
         default:
     }
+}
 
-    if(isset($_POST['usuario']) && isset($_POST['pass'])){
-        $username = $_POST['usuario'];
-        $password = $_POST['pass'];
+if(isset($_POST['usuario']) && isset($_POST['pass'])){
+    $username = $_POST['usuario'];
+    $password = $_POST['pass'];
 
-        $db = new Database();
-        $query = $db->connect()->prepare('SELECT *FROM usuarios WHERE usuarios_nombre = :usuario AND usuarios_pass = :pass');
-        $query->execute(['usuario' => $username, 'pass' => $password]);
+    $db = new Database();
+    $query = $db->connect()->prepare('SELECT *FROM usuarios WHERE usuarios_nombre = :usuario AND usuarios_pass = :pass');
+    $query->execute(['usuario' => $username, 'pass' => $password]);
 
-        $row = $query->fetch(PDO::FETCH_NUM);
+    $row = $query->fetch(PDO::FETCH_NUM);
+    
+    if($row == true){
+        $rol = $row[3];
         
-        if($row == true){
-            $rol = $row[3];
-            
-            $_SESSION['rol'] = $rol;
-            switch($rol){
-              case 1:
-                header('location: admin.php');
+        $_SESSION['rol'] = $rol;
+        switch($rol){
+          case 1:
+              header('location: indexadmin.php');
+          break;
+  
+          case 2:
+          header('location: indexmaestros.php');
+          break;
+  
+          case 3:
+            header('location: indexalumno.php');
             break;
-    
-            case 2:
-            header('location: maestroindex.php');
+  
+          case 4:
+            header('location: indexpadres.php');
             break;
-    
-            case 3:
-              header('location: indexalumno.php');
-              break;
-    
-              case 4:
-                header('location: colab.php');
-                break;
-            default:
-            }
-        }else{
-            // no existe el usuario
-            echo "Nombre de usuario o contraseña incorrecto";
+  
+          default:
         }
-        
-
+    }else{
+        // no existe el usuario
+        echo "Nombre de usuario o contraseña incorrecto";
     }
+    
 
 }
 ?>
@@ -94,28 +88,31 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-1"></div>
-        <div class="col"><form action="#" method="POST">
+        <div class="col"><form action="" method="post">
+          <!-- Mostrar erro -->
+          <?php
+          ?>
             <!-- Email input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="usuario">Usuario</label>
-              <input type="user" id="usuario" class="form-control" />
+              <input type="user" id="usuario" class="form-control" name="usuario"/>
             </div>
           
             <!-- Password input -->
             <div class="form-outline mb-4">
                 <label class="form-label" for="pass">Contrasena</label>
-              <input type="password" id="pass" class="form-control" />
+              <input type="password" id="pass" class="form-control" name="pass" />
             </div>
           
             <!-- 2 column grid layout for inline styling -->
             <div class="row mb-4">
               <div class="col d-flex justify-content-center">
-                <a href="#!">Forgot password?</a>
+                <a href="">Forgot password?</a>
               </div>
             </div>
           
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-block mb-4">Iniciar Sesion</button>
+            <input type="submit" class="btn btn-primary btn-block mb-4" id="send" name="send" value="Iniciar Sesion">
           
 </div>
 </body>
