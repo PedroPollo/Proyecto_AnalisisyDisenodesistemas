@@ -1,3 +1,9 @@
+<?php 
+//session_unset(); 
+
+// destroy the session 
+session_destroy(); 
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
