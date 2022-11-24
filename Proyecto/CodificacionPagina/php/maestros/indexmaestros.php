@@ -1,4 +1,5 @@
-<a id="cerrar sesion" name="cerrar sesion">cerra</a>
-<?php
-echo $_SESSION['rol'];
+<?php 
+session_start();
+echo $_SESSION['usuario'];
+echo "hola"
 ?>

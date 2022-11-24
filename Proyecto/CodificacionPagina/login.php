@@ -1,16 +1,9 @@
 <?php
 include_once 'conexion_bd.php';
 
-if(isset($_POST['cerrar_sesion'])){
-  session_unset(); 
-
-  // destroy the session 
-  session_destroy(); 
-}
-
 session_start();
 
-if(isset($_SESSION['rol'])){
+if(isset($_SESSION['rol']) and isset($_SESSION['usuario'])){
     switch($_SESSION['rol']){
         case 1:
             header('location: indexadmin.php');
@@ -39,12 +32,12 @@ if(isset($_POST['usuario']) && isset($_POST['pass'])){
     $db = new Database();
     $query = $db->connect()->prepare('SELECT *FROM usuarios WHERE usuarios_nombre = :usuario AND usuarios_pass = :pass');
     $query->execute(['usuario' => $username, 'pass' => $password]);
-    $_SESSION['usuario'] = $usuario;
 
     $row = $query->fetch(PDO::FETCH_NUM);
     
     if($row == true){
         $rol = $row[3];
+        $_SESSION['usuario'] = $username;
         
         $_SESSION['rol'] = $rol;
         switch($rol){
@@ -53,7 +46,7 @@ if(isset($_POST['usuario']) && isset($_POST['pass'])){
           break;
   
           case 2:
-          header('location: indexmaestros.php');
+          header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/maestros/indexmaestros.php');
           break;
   
           case 3:
