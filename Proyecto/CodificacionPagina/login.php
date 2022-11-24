@@ -14,7 +14,7 @@ if(isset($_SESSION['rol'])){
         break;
 
         case 3:
-          header('location: indexalumno.php');
+          header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/alumno/indexalumno.php');
           break;
 
         case 4:
@@ -50,7 +50,7 @@ if(isset($_POST['usuario']) && isset($_POST['pass'])){
           break;
   
           case 3:
-            header('location: indexalumno.php');
+            header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/alumno/indexalumno.php');
             break;
   
           case 4:
@@ -61,7 +61,9 @@ if(isset($_POST['usuario']) && isset($_POST['pass'])){
         }
     }else{
         // no existe el usuario
-        echo "Nombre de usuario o contraseña incorrecto";
+        echo "<div class='alert alert-danger' role='alert'>
+        Contraseña o Usuario incorrectos
+      </div>";
     }
     
 

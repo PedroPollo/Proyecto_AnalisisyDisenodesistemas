@@ -1,8 +1,8 @@
 <?php 
-//session_unset(); 
-
-// destroy the session 
-session_destroy(); 
+session_start();
+if($_SESSION['rol'] != 3){
+  header('location: ../../index.html');
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -40,7 +40,7 @@ session_destroy();
               <a class="nav-link" href="#">Maestros</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Cerrar Sesion</a>
+              <a class="nav-link" href="../../logout.php">Cerrar Sesion</a>
             </li>
           </ul>
     </div>
