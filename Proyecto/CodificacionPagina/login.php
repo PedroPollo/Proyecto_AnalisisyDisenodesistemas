@@ -3,7 +3,7 @@ include_once 'conexion_bd.php';
 
 session_start();
 
-if(isset($_SESSION['rol']) and isset($_SESSION['usuario'])){
+if(isset($_SESSION['rol'])){
     switch($_SESSION['rol']){
         case 1:
             header('location: indexadmin.php');
