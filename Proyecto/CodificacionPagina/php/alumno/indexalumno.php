@@ -28,16 +28,16 @@ if($_SESSION['rol'] != 3){
     <div class="col">
         <ul class="nav justify-content-center">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Tareas</a>
+              <a class="nav-link active" aria-current="page" href="tareasalumno.php">Tareas</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Calificaciones</a>
+              <a class="nav-link" href="alumnocalif.php">Calificaciones</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Horario</a>
+              <a class="nav-link" href="horarioalumno.php">Horario</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Maestros</a>
+              <a class="nav-link" href="maestrosalumno.php">Maestros</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../../logout.php">Cerrar Sesion</a>

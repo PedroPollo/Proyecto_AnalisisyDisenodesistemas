@@ -1,3 +1,23 @@
+<?php
+session_start();
+if(isset($_SESSION['rol'])){
+    switch($_SESSION['rol']){
+        case 1:
+            header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/indexadmin.php');
+        break;
+        case 2:
+            header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/maestro/indexmaestro.php');
+        break;
+        case 3:
+            header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/alumno/indexalumno.php');
+        break;
+        case 4:
+            header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/padres/indexpadres.php');
+        break;
+        default:
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,7 +32,7 @@
 <body>
     <!-- Image and text -->
 <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="index.html">
+    <a class="navbar-brand" href="index.php">
       <img src="/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/rsc/Mundo Educativo.png" width="40" height="40" class="d-inline-block align-top" alt="">
       <span class="navbar-brand mb-0 h1">Sistema de Consulta Escolar</span>
     </a>
