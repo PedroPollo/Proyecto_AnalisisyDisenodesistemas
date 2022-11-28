@@ -3,6 +3,16 @@ session_start();
 if($_SESSION['rol'] != 3){
   header('location: ../../index.html');
 }
+
+include_once '../../conexion_bd.php';
+$db = new Database();
+$query = $db->connect()->prepare('SELECT * FROM `alumno` WHERE `usuario_id`= :usuarioid;');
+$query -> execute(['usuarioid' => $_SESSION['usuarioid']]);
+$row = $query-> fetch(PDO::FETCH_NUM);
+if($row == true){
+  $alumnoid = $row[0];
+  $_SESSION['alumnoid']=$alumnoid;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">

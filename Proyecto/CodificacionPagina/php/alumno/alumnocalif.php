@@ -71,5 +71,19 @@ if($_SESSION['rol'] != 3){
         </div>
 </div>
         </header>
+        <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id Materia</th>
+      <th scope="col">Primer Parcial</th>
+      <th scope="col">Segundo Parcial</th>
+      <th scope="col">Tercer Parcial</th>
+      <th scope="col">Calificacion Final</th>
+      <th scope="col">Profesor</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
 </body>
 </html>
