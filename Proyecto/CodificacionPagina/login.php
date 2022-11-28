@@ -6,7 +6,7 @@ session_start();
 if(isset($_SESSION['rol'])){
     switch($_SESSION['rol']){
         case 1:
-            header('location: indexadmin.php');
+            header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/indexadmin.php');
         break;
 
         case 2:
@@ -18,7 +18,7 @@ if(isset($_SESSION['rol'])){
           break;
 
         case 4:
-          header('location: indexpadres.php');
+          header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/padres/indexpadres.php');
           break;
 
         default:
@@ -44,7 +44,7 @@ if(isset($_POST['usuario']) && isset($_POST['pass'])){
         $_SESSION['rol'] = $rol;
         switch($rol){
           case 1:
-              header('location: indexadmin.php');
+              header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/indexadmin.php');
           break;
   
           case 2:
@@ -56,7 +56,7 @@ if(isset($_POST['usuario']) && isset($_POST['pass'])){
             break;
   
           case 4:
-            header('location: indexpadres.php');
+            header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/indexpadres.php');
             break;
   
           default:
