@@ -10,8 +10,8 @@ $query = $db->connect()->prepare('SELECT * FROM `alumno` WHERE `usuario_id`= :us
 $query -> execute(['usuarioid' => $_SESSION['usuarioid']]);
 $row = $query-> fetch(PDO::FETCH_NUM);
 if($row == true){
-  $alumnoid = $row[0];
-  $_SESSION['alumnoid']=$alumnoid;
+  $adminid = $row[0];
+  $_SESSION['adminid']=$adminid;
 }
 ?>
 <!DOCTYPE html>

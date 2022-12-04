@@ -70,6 +70,11 @@ if($_SESSION['rol'] != 1){
         </div>
 </div>
         </header>
+        <?php
+        $conexion=mysqli_connect('localhost','root','','proyecto');
+        $sql = "SELECT alumno.alumno_nombre,usuarios.usuarios_nombre FROM alumno,usuarios WHERE usuarios.usuarios_id=alumno.usuario_id";
+        $result=mysqli_query($conexion,$sql);
+        ?>
         <table class="table table-striped">
   <thead>
     <tr>
@@ -79,26 +84,41 @@ if($_SESSION['rol'] != 1){
     </tr>
   </thead>
   <tbody>
+    <?php
+    while($mostrar=mysqli_fetch_array($result)){
+    ?>
+    <tr>
+    <td><?php echo $mostrar[1] ?></td>
+    <td><?php echo $mostrar[0] ?></td>
+    <td><input type="button" class="btn btn-danger" value="Eliminar"> | <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregaroeditar">Editar</button></td>
+    </tr>
+    <?php
+    }
+    ?>
   </tbody>
 </table>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Agregar Nuevo Alumno</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregaroeditar">Agregar Nuevo Alumno</button>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="agregaroeditar" tabindex="-1" aria-labelledby="agregaroeditarLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar ó Editar Alumno</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form>
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <label for="nombre" class="col-form-label">Nombre:</label>
+            <input type="text" class="form-control" id="nombre">
           </div>
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+          <label for="usuario" class="col-form-label">usuario:</label>
+            <input type="text" class="form-control" id="usuario">
+          </div>
+          <div class="mb-3">
+          <label for="recipient-name" class="col-form-label">Contraseña:</label>
+            <input type="password" class="form-control" id="recipient-name">
           </div>
         </form>
       </div>
