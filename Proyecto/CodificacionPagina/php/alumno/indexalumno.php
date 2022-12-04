@@ -81,7 +81,7 @@ if($row == true){
         </div>
 <div class="col">
     <div id="page" class="container-fluid d-print-block">
-        <div class="card"><img src="/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/rsc/Banner Mundo E.png" width="1305" height="400"></div>
+        <div class="card"><img src="/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/rsc/Banner Mundo E.png" style="max-width:100%;max-height: 400px;width:auto;height:auto;"></div>
     </div>
 </div>
         </header>
