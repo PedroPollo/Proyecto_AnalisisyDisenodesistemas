@@ -27,7 +27,7 @@ if($_SESSION['rol'] != 1){
     <div class="col">
         <ul class="nav justify-content-center">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="indexadmin.php">Index</a>
+              <a class="nav-link active" aria-current="page" href="alumnosadmin.php">Administrar Alumnos</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="padresadmin.php">Administrar Padres</a>
@@ -39,7 +39,7 @@ if($_SESSION['rol'] != 1){
               <a class="nav-link" href="materiasadmin.php">Administrar Materias</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="adminusuarios.php">Administrar Usuarios</a>
+              <a class="nav-link active" aria-current="page" href="indexadmin.php">Index</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../../logout.php">Cerrar Sesion</a>

@@ -50,6 +50,9 @@ if($row == true){
               <a class="nav-link" href="materiasadmin.php">Administrar Materias</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="adminusuarios.php">Administrar Usuarios</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="../../logout.php">Cerrar Sesion</a>
             </li>
           </ul>
