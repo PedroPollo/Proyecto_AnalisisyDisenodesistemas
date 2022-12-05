@@ -75,14 +75,15 @@ if($_SESSION['rol'] != 1){
         </header>
         <?php
         $conexion=mysqli_connect('localhost','root','','proyecto');
-        $sql = "SELECT alumno.alumno_nombre,usuarios.usuarios_nombre FROM alumno,usuarios WHERE usuarios.usuarios_id=alumno.usuario_id";
+        $sql = "SELECT * FROM usuarios";
         $result=mysqli_query($conexion,$sql);
         ?>
-        <table class="table table-striped">
+        <table class="table table-striped" id="tablaUsuarios">
   <thead>
     <tr>
       <th scope="col">Usuario</th>
-      <th scope="col">Nombre</th>
+      <th scope="col">Contraseña</th>
+      <th scope="col">Rol</th>
       <th scope="col">Acciones</th>
     </tr>
   </thead>
@@ -92,45 +93,82 @@ if($_SESSION['rol'] != 1){
     ?>
     <tr>
     <td><?php echo $mostrar[1] ?></td>
-    <td><?php echo $mostrar[0] ?></td>
-    <td><input type="button" class="btn btn-danger" value="Eliminar"> | <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregaroeditar">Editar</button></td>
+    <td><?php echo $mostrar[2] ?></td>
+    <td><?php switch($mostrar[3]){
+      case 1: echo "Administrador";
+      break;
+      case 2: echo "Maestro";
+      break;
+      case 3: echo "Alumno";
+      break;
+      case 4: echo "Padre";
+      break;
+      default: echo "Sin asignar";
+      break;
+    } ?></td>
+    <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCRUD">Editar</button></td>
     </tr>
     <?php
     }
     ?>
   </tbody>
 </table>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregaroeditar">Agregar Nuevo Alumno</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCRUD">Agregar Nuevo Usuario</button>
 
-<div class="modal fade" id="agregaroeditar" tabindex="-1" aria-labelledby="agregaroeditarLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar ó Editar Alumno</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="nombre" class="col-form-label">Nombre:</label>
-            <input type="text" class="form-control" id="nombre">
-          </div>
-          <div class="mb-3">
-          <label for="usuario" class="col-form-label">usuario:</label>
-            <input type="text" class="form-control" id="usuario">
-          </div>
-          <div class="mb-3">
-          <label for="recipient-name" class="col-form-label">Contraseña:</label>
-            <input type="password" class="form-control" id="recipient-name">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Agregar</button>
-      </div>
+<!--Modal para CRUD-->
+<div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <form id="formUsuarios">    
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="" class="col-form-label">Usuario:</label>
+                    <input type="text" class="form-control" id="username">
+                    </div>
+                    </div>
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="" class="col-form-label">Nombre:</label>
+                    <input type="text" class="form-control" id="first_name">
+                    </div> 
+                    </div>    
+                </div>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="form-group">
+                        <label for="" class="col-form-label">Contraseña</label>
+                        <input type="text" class="form-control" id="password">
+                        </div>
+                    </div>    
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3">    
+                        <div class="form-group">
+                        <label for="r" class="col-form-label">Rol</label>
+                        <select name="roles" id="roles">
+                        <option>Administrador</option>
+                        <option>Maestro</option>
+                        <option>Alumno</option>
+                        <option>Padre</option>
+                        </select>
+                        </div>            
+                    </div>    
+                </div>                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="submit" id="btnGuardar" class="btn btn-primary">Guardar</button>
+            </div>
+        </form>    
+        </div>
     </div>
-  </div>
-</div>
+</div>  
 </body>
 </html>
