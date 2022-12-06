@@ -106,45 +106,42 @@ if($_SESSION['rol'] != 1){
       default: echo "Sin asignar";
       break;
     } ?></td>
-    <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCRUD">Editar</button></td>
+    <td><input type="button" class="btn btn-danger" value="Eliminar"> | <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCRUD">Editar</button></td>
     </tr>
     <?php
     }
     ?>
   </tbody>
 </table>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCRUD">Agregar Nuevo Usuario</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">Agregar Nuevo Usuario</button>
 
 <!--Modal para CRUD-->
-<div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Usuario</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
             </div>
-        <form id="formUsuarios">    
+        <form action="registraUsuario.php" method="POST">    
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-6">
                     <div class="form-group">
                     <label for="" class="col-form-label">Usuario:</label>
-                    <input type="text" class="form-control" id="username">
+                    <input type="text" class="form-control" id="username" name="username">
                     </div>
                     </div>
                     <div class="col-lg-6">
-                    <div class="form-group">
-                    <label for="" class="col-form-label">Nombre:</label>
-                    <input type="text" class="form-control" id="first_name">
-                    </div> 
+                    
                     </div>    
                 </div>
                 <div class="row">
                     <div class="col-lg-9">
                         <div class="form-group">
                         <label for="" class="col-form-label">Contraseña</label>
-                        <input type="text" class="form-control" id="password">
+                        <input type="password" class="form-control" id="password" name="password">
                         </div>
                     </div>    
                   </div>
@@ -152,11 +149,11 @@ if($_SESSION['rol'] != 1){
                     <div class="col-lg-3">    
                         <div class="form-group">
                         <label for="r" class="col-form-label">Rol</label>
-                        <select name="roles" id="roles">
-                        <option>Administrador</option>
-                        <option>Maestro</option>
-                        <option>Alumno</option>
-                        <option>Padre</option>
+                        <select name="roles" id="roles" name="roles">
+                        <option value="1">Administrador</option>
+                        <option value="2">Maestro</option>
+                        <option value="3">Alumno</option>
+                        <option value="4">Padre</option>
                         </select>
                         </div>            
                     </div>    
