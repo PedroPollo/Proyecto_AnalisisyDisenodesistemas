@@ -41,7 +41,7 @@ if($row == true){
               <a class="nav-link active" aria-current="page" href="alumnosadmin.php">Administrar Alumnos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="padresadmin.php">Administrar Padres</a>
+              <a class="nav-link " href="padresadmin.php">Administrar Padres</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="maestrosadmin.php">Administrar Maestros</a>
