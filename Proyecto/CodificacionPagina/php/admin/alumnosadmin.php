@@ -53,7 +53,7 @@ if($_SESSION['rol'] != 1){
                 <div class="card-body ">
                     <div class="d-sm-flex align-items-center">
                         <div class="mr-auto">
-                            <div class="page-context-header"><div class="page-header-headings"><h1>Calificaciones</h1></div></div>
+                            <div class="page-context-header"><div class="page-header-headings"><h1>Alumnos</h1></div></div>
                         </div>
         
                         <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">

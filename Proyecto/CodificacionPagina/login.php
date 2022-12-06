@@ -109,12 +109,7 @@ if(isset($_POST['usuario']) && isset($_POST['pass'])){
               <input type="password" id="pass" class="form-control" name="pass" />
             </div>
           
-            <!-- 2 column grid layout for inline styling -->
-            <div class="row mb-4">
-              <div class="col d-flex justify-content-center">
-                <a href="">Forgot password?</a>
-              </div>
-            </div>
+            
           
             <!-- Submit button -->
             <input type="submit" class="btn btn-primary btn-block mb-4" id="send" name="send" value="Iniciar Sesion">
