@@ -13,6 +13,12 @@ if($_SESSION['rol'] != 1){
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
     <title>Administrador</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!--datables CSS básico-->
+    <link rel="stylesheet" type="text/css" href="../../assets/datatables/datatables.min.css"/>
+    <!--datables estilo bootstrap 4 CSS-->  
+    <link rel="stylesheet"  type="text/css" href="../../assets/datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">    
+      
 </head>
 <body>
     <nav class="navbar bg-light">
@@ -73,85 +79,90 @@ if($_SESSION['rol'] != 1){
         </div>
 </div>
         </header>
-        <?php
-        $conexion=mysqli_connect('localhost','root','','proyecto');
-        $sql = "SELECT * FROM usuarios";
-        $result=mysqli_query($conexion,$sql);
-        ?>
-        <table class="table table-striped" id="tablaUsuarios">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Usuario</th>
-      <th scope="col">Contraseña</th>
-      <th scope="col">Rol</th>
-      <th scope="col">Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
+        <div class="container caja">
+        <div class="row">
+            <div class="col-lg-12">
+            <div class="table-responsive">        
+                <table id="tablaUsuarios" class="table table-striped table-bordered table-condensed" style="width:100%" >
+                    <thead class="text-center">
+                        <tr>
+                            <th>ID</th>
+                            <th>Usuario</th>
+                            <th>Contraseña</th>                                
+                            <th>Rol</th>  
+                            <th>Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>                           
+                    </tbody>        
+                </table>               
+            </div>
+            </div>
+        </div>  
+    </div>   
 
   </tbody>
 </table>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Agregar Nuevo Usuario</button>
 
-<!--Modal para Agregar-->
+<!--Modal para CRUD-->
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar Usuario</h5>
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        <form id="formUsuarios" method="POST">   
-        <div class="modal-body">
+        <form id="formUsuarios">    
+            <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-6">
                     <div class="form-group">
                     <label for="" class="col-form-label">Usuario:</label>
-                    <input type="text" class="form-control" id="username" name="username">
+                    <input type="text" class="form-control" id="username">
                     </div>
-                    </div>
-                    <div class="col-lg-6">
-                    
-                    </div>    
+                    </div> 
                 </div>
                 <div class="row">
                     <div class="col-lg-9">
                         <div class="form-group">
-                        <label for="" class="col-form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password">
+                        <label for="" class="col-form-label">Password</label>
+                        <input type="text" class="form-control" id="password">
                         </div>
-                    </div>    
-                  </div>
-                  <div class="row">
+                    </div>   
+                </div>
+                <div class="row">
+                    <div class="col-lg-6"> 
                     <div class="col-lg-3">    
                         <div class="form-group">
-                        <label for="r" class="col-form-label">Rol</label>
-                        <select name="roles" id="roles" name="roles">
-                        <option value="1">Administrador</option>
-                        <option value="2">Maestro</option>
-                        <option value="3">Alumno</option>
-                        <option value="4">Padre</option>
+                        <label for="rol" class="col-form-label">Rol</label>
+                        <select name="rol" id="rol">
+                          <option value="1">Administrador</option>
+                          <option value="2">Maestro</option>
+                          <option value="3">Alumno</option>
+                          <option value="4">Padre</option>
                         </select>
                         </div>            
                     </div>    
                 </div>                
             </div>
             <div class="modal-footer">
-                <button type="submit" id="btnGuardar" class="btn btn-primary">Guardar</button>
+                <button type="submit" id="btnGuardar" class="btn btn-dark">Guardar</button>
             </div>
         </form>    
         </div>
     </div>
-</div> 
+</div>  
 
 <!-- jQuery, Poppers -->
-<script src="assets/jquery/jquery-3.1.1.min.js"></script>
-<script src="assets/popper/popper.min.js"></script>
+<script src="../../assets/jquery/jquery-3.1.1.min.js"></script>
+<script src="../../assets/popper/popper.min.js"></script>
 
 <!--dataTables JS-->
-<script type="text/javascript" src="assets/datatables/datatables.min.js"></script>
+<script type="text/javascript" src="../../assets/datatables/datatables.min.js"></script>
 
-<script type"text/javascript" src="crudusuarios.js"></script>
+<script type="text/javascript" src="crudusuarios.js"></script>
 
 </body>
 </html>
