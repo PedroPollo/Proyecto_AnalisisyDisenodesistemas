@@ -89,42 +89,19 @@ if($_SESSION['rol'] != 1){
     </tr>
   </thead>
   <tbody>
-    <?php
-    while($mostrar=mysqli_fetch_array($result)){
-    ?>
-    <tr>
-    <td><?php echo $mostrar[0] ?></td>
-    <td><?php echo $mostrar[1] ?></td>
-    <td><?php echo $mostrar[2] ?></td>
-    <td><?php switch($mostrar[3]){
-      case 1: echo "Administrador";
-      break;
-      case 2: echo "Maestro";
-      break;
-      case 3: echo "Alumno";
-      break;
-      case 4: echo "Padre";
-      break;
-      default: echo "Sin asignar";
-      break;
-    } ?></td>
-    <td><input type="button" class="btn btn-danger" value="Eliminar"> | <button type="button" class="btn btn-success editbtn" data-bs-toggle="modal" data-bs-target="#editar">Editar</button></td>
-    </tr>
-    <?php
-    }
-    ?>
+
   </tbody>
 </table>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">Agregar Nuevo Usuario</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Agregar Nuevo Usuario</button>
 
 <!--Modal para Agregar-->
-<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Agregar Usuario</h5>
             </div>
-        <form action="registraUsuario.php" method="POST">   
+        <form id="formUsuarios" method="POST">   
         <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-6">
@@ -167,72 +144,14 @@ if($_SESSION['rol'] != 1){
     </div>
 </div> 
 
-<!--Modal para Editar-->
-<div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
-            </div>
-        <form action="editUsuario.php" method="POST">
-          <input type="hidden" name="id" id="update_id">    
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-6">
-                    <div class="form-group">
-                    <label for="" class="col-form-label">Usuario:</label>
-                    <input type="text" class="form-control" id="username" name="username">
-                    </div>
-                    </div>
-                    <div class="col-lg-6">
-                    
-                    </div>    
-                </div>
-                <div class="row">
-                    <div class="col-lg-9">
-                        <div class="form-group">
-                        <label for="" class="col-form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                        </div>
-                    </div>    
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-3">    
-                        <div class="form-group">
-                        <label for="r" class="col-form-label">Rol</label>
-                        <select name="roles" id="roles" name="roles">
-                        <option value="1">Administrador</option>
-                        <option value="2">Maestro</option>
-                        <option value="3">Alumno</option>
-                        <option value="4">Padre</option>
-                        </select>
-                        </div>            
-                    </div>    
-                </div>                
-            </div>
-            <div class="modal-footer">
-                <button type="submit" id="btnGuardar" class="btn btn-primary">Guardar</button>
-            </div>
-        </form>    
-        </div>
-    </div>
-</div> 
+<!-- jQuery, Poppers -->
+<script src="assets/jquery/jquery-3.1.1.min.js"></script>
+<script src="assets/popper/popper.min.js"></script>
 
-<script>
+<!--dataTables JS-->
+<script type="text/javascript" src="assets/datatables/datatables.min.js"></script>
 
-$('.editbtn').on('click',function () {
-  $tr = $(this).closest('tr');
-  var datos = $tr.children("td").map(function(){
-    return $(this).text();
-  });
-$(update_id).val(datos[0])
-$(username).val(datos[1]);
-$(password).val(datos[2]);
-$(roles).val(datos[3];)
-
-});
-
-</script>
+<script type"text/javascript" src="crudusuarios.js"></script>
 
 </body>
 </html>
