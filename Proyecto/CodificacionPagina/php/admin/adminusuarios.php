@@ -103,7 +103,7 @@ if($_SESSION['rol'] != 1){
 
   </tbody>
 </table>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Agregar Nuevo Usuario</button>
+<button type="button" class="btn btn-primary" id="btnCrear" data-bs-toggle="modal" data-bs-target="#modal">Agregar Nuevo Usuario</button>
 
 <!--Modal para CRUD-->
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -148,7 +148,8 @@ if($_SESSION['rol'] != 1){
                 </div>                
             </div>
             <div class="modal-footer">
-                <button type="submit" id="btnGuardar" class="btn btn-dark">Guardar</button>
+                <button type="button" id="btnGuardar" class="btn btn-dark">Guardar</button>
+                <button type="button" id="brnEditar" class="btn btn-dark">Editar</button>
             </div>
         </form>    
         </div>
@@ -162,7 +163,147 @@ if($_SESSION['rol'] != 1){
 <!--dataTables JS-->
 <script type="text/javascript" src="../../assets/datatables/datatables.min.js"></script>
 
-<script type="text/javascript" src="crudusuarios.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded",function(event){
+    var user_id,opcion;
+    opcion = 4;
+    let tablaUsuarios = $("#tablaUsuarios").DataTable({
+      "ajax":{
+        url: "crudusuarios.php",
+        method : "POST",
+        data: {opcion:opcion},
+        dataSrc:""
+      },
+      "columns":[
+        {"data": "user_id"},
+        {"data": "username"},
+        {"data": "password"},
+        {"defaultContent": "<div class='text-center'><div class='btn-group'><button class='btn btn-primary btn-sm btnEditar'>Editar</button><button class='btn btn-danger btn-sm btnBorrar'>Eliminar</button></div></div>"}
+      ]
+    });
+
+    //Funcionabilidad de los Botones
+    //Boton Crear usuario
+    $('#btnCrear').click(function(){
+      $('#btnGuardar').show();
+      $('#brnEditar').hide();
+      limpiarFormulario();
+      $("#modal").modal('show');
+    });
+
+    //Boton editar usuario
+    $('#brnEditar').click(function(){
+      $('#modal').modal('hide');
+      let registro = recuperarDatosFormulario();
+      modificarRegistro(registro);
+    });
+
+    //Boton Guardar (Modal)
+    $('#btnGuardar').click(function(){
+      $("#modal").modal('hide');
+      let registro = recuperarDatosFormulario();
+      agregarRegistro(registro);
+    });
+
+    //Boton Editar
+    $('#tablaUsuarios').on('click','button.btnEditar',function(){
+      $('#btnGuardar').hide();
+      $('#brnEditar').show();
+      let registro = tablaUsuarios.row($(this).parents('tr')).data();
+      recuperarRegistro(registro.user_id);
+    });
+
+    //Boton Borrar
+    $('#tablaUsuarios').on('click','button.btnBorrar',function(){
+      if(confirm("¿Esta seguro de borrar el registro?")){
+        let registro = tablaUsuarios.row($(this).parents('tr')).data();
+        borrarRegistro(registro.user_id);
+      }
+    });
+
+    //Funciones que interactuan con el formulario
+    function limpiarFormulario(){
+      $('#username').val('');
+      $('#password').val('');
+      $('#rol').val('');
+    }
+
+    function recuperarDatosFormulario(){
+      let registro = {
+        user_id: $('#user_id').val(),
+        username: $('#username').val(),
+        password: $('#password').val(),
+        rol: $('#rol').val()
+      };
+      return registro;
+    }
+
+    //Funcion para comunicarse con el servidor
+    function agregarRegistro(registro){
+      opcion = 1;
+      $.ajax({
+        type: 'POST',
+        url: 'crudusuario.php',
+        data: {opcion:opcion,registro:registro},
+        success:function(msg){
+          tablaUsuarios.ajax.reload();
+        },
+        error: function(){
+          alert("Hay unproblema");
+        }
+      });
+    }
+
+    function borrarRegistro(user_id){
+      opcion = 3;
+      $.ajax({
+        type: 'POST',
+        url: 'crudusuario.php',
+        data:{opcion:opcion,user_id:user_id},
+        success:function(msg){
+          tablaUsuarios.ajax.reload();
+        },
+        error: function(){
+          alert("Hay unproblema");
+        }
+      });
+    }
+
+    function recuperarRegistro(user_id){
+      opcion = 5;
+      $.ajax({
+        type: 'POST',
+        url: 'crudusuario.php',
+        data:{opcion:opcion,user_id:user_id},
+        success: function(datos){
+          $('#user_id').val(datos[0].user_id);
+          $('#username').val(datos[1].username);
+          $('#password').val(datos[2].password);
+          $('#rol').val(datos[3].rol);
+          $("#modal").modal('show');
+        },
+        error: function(){
+          alert("Hay unproblema");
+        }
+      });
+    }
+
+    function modificarRegistro(registro){
+      opcion = 2;
+      $.ajax({
+        type: 'POST',
+        url: 'crudusuario.php',
+        data:{opcion:opcion,registro:registro.user_id},
+        success:function(msg){
+          tablaUsuarios.ajax.reload();
+        },
+        error: function(){
+          alert("Hay unproblema");
+        }
+      });
+    }
+  });
+</script>
 
 </body>
 </html>
