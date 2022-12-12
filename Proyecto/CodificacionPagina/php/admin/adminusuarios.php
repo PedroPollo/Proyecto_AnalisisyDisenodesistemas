@@ -11,8 +11,15 @@ if($_SESSION['rol'] != 1){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <link href ="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
     <title>Administrador</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Import jQuery , popper, Bootstraps JS, dataTables -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
 </head>
 <body>
     <nav class="navbar bg-light">
@@ -73,56 +80,17 @@ if($_SESSION['rol'] != 1){
         </div>
 </div>
         </header>
-        <?php
-        $conexion=mysqli_connect('localhost','root','','proyecto');
-        $sql = "SELECT * FROM usuarios";
-        $result=mysqli_query($conexion,$sql);
-        ?>
         <table class="table table-striped" id="tablaUsuarios">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Usuario</th>
-      <th scope="col">Contraseña</th>
-      <th scope="col">Rol</th>
-      <th scope="col">Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-    while($mostrar=mysqli_fetch_array($result)){
-    ?>
-    <tr>
-    <td><?php echo $mostrar[0] ?></td>
-    <td><?php echo $mostrar[1] ?></td>
-    <td><?php echo $mostrar[2] ?></td>
-    <td><?php switch($mostrar[3]){
-      case 1: echo "Administrador";
-      break;
-      case 2: echo "Maestro";
-      break;
-      case 3: echo "Alumno";
-      break;
-      case 4: echo "Padre";
-      break;
-      default: echo "Sin asignar";
-      break;
-    } ?></td>
-    <td><input type="button" class="btn btn-danger" value="Eliminar"> | <button type="button" class="btn btn-success editbtn" data-bs-toggle="modal" data-bs-target="#editar">Editar</button></td>
-    </tr>
-    <?php
-    }
-    ?>
-  </tbody>
-</table>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add">Agregar Nuevo Usuario</button>
 
-<!--Modal para Agregar-->
-<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        </table>
+<button id="BotonAgregar" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Agregar Nuevo Usuario</button>
+
+<!--Modal para Agregar o Editar-->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar Usuario</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Agregar o Editar Usuario</h5>
             </div>
         <form action="registraUsuario.php" method="POST">   
         <div class="modal-body">
@@ -160,79 +128,33 @@ if($_SESSION['rol'] != 1){
                 </div>                
             </div>
             <div class="modal-footer">
-                <button type="submit" id="btnGuardar" class="btn btn-primary">Guardar</button>
+                <button type="submit" id="ConfirmarAgregar" class="btn btn-primary">Guardar</button>
             </div>
         </form>    
         </div>
     </div>
 </div> 
+<script type="text/javascript">
+  fetchUser();
+  $(document).ready(function(){
+    function fetchUser(){
+      var action = "select";
+      $.ajax({
+        url: "select.php",
+        methos: "POST",
+        data: {action:action},
+        success: function(data){
+          $('#id').val('');
+          $('#username').val('');
+          $('#password').val('');
+          $('#rol').val('');
+          $('#action').val('Add');
+          $('#tablaUsuarios').html(data);
+        }
 
-<!--Modal para Editar-->
-<div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
-            </div>
-        <form action="editUsuario.php" method="POST">
-          <input type="hidden" name="id" id="update_id">    
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-6">
-                    <div class="form-group">
-                    <label for="" class="col-form-label">Usuario:</label>
-                    <input type="text" class="form-control" id="username" name="username">
-                    </div>
-                    </div>
-                    <div class="col-lg-6">
-                    
-                    </div>    
-                </div>
-                <div class="row">
-                    <div class="col-lg-9">
-                        <div class="form-group">
-                        <label for="" class="col-form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                        </div>
-                    </div>    
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-3">    
-                        <div class="form-group">
-                        <label for="r" class="col-form-label">Rol</label>
-                        <select name="roles" id="roles" name="roles">
-                        <option value="1">Administrador</option>
-                        <option value="2">Maestro</option>
-                        <option value="3">Alumno</option>
-                        <option value="4">Padre</option>
-                        </select>
-                        </div>            
-                    </div>    
-                </div>                
-            </div>
-            <div class="modal-footer">
-                <button type="submit" id="btnGuardar" class="btn btn-primary">Guardar</button>
-            </div>
-        </form>    
-        </div>
-    </div>
-</div> 
-
-<script>
-
-$('.editbtn').on('click',function () {
-  $tr = $(this).closest('tr');
-  var datos = $tr.children("td").map(function(){
-    return $(this).text();
+      });
+    }
   });
-$(update_id).val(datos[0])
-$(username).val(datos[1]);
-$(password).val(datos[2]);
-$(roles).val(datos[3];)
-
-});
-
 </script>
-
 </body>
 </html>
