@@ -3,6 +3,16 @@ session_start();
 if($_SESSION['rol'] != 3){
   header('location: ../../index.html');
 }
+
+include_once '../../conexion_bd.php';
+$db = new Database();
+$query = $db->connect()->prepare('SELECT * FROM `Padre` WHERE `usuario_id`= :usuarioid;');
+$query -> execute(['usuarioid' => $_SESSION['usuarioid']]);
+$row = $query-> fetch(PDO::FETCH_NUM);
+if($row == true){
+  $alumnoid = $row[0];
+  $_SESSION['padreid']=$padreid;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -26,9 +36,9 @@ if($_SESSION['rol'] != 3){
         </div>
     </div>
     <div class="col">
-    <ul class="nav justify-content-center">
+        <ul class="nav justify-content-center">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="tareasalumno.php">Tarea</a>
+              <a class="nav-link active" aria-current="page" href="tareasalumno.php">Tareas</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="alumnocalif.php">Calificaciones</a>
@@ -37,12 +47,10 @@ if($_SESSION['rol'] != 3){
               <a class="nav-link" href="horarioalumno.php">Horario</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="indexalumno.php">Index</a>
+              <a class="nav-link" href="maestrosalumno.php">Maestros</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../../logout.php">Cerrar Sesion</a>
-            </li>
-          </ul>
             </li>
           </ul>
     </div>
@@ -53,7 +61,7 @@ if($_SESSION['rol'] != 3){
                 <div class="card-body ">
                     <div class="d-sm-flex align-items-center">
                         <div class="mr-auto">
-                            <div class="page-context-header"><div class="page-header-headings"><h1>Maestros</h1></div></div>
+                            <div class="page-context-header"><div class="page-header-headings"><h1>Escuela Mundo Educativo</h1></div></div>
                         </div>
         
                         <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
@@ -71,6 +79,11 @@ if($_SESSION['rol'] != 3){
             </div>
         </div>
         </div>
+<div class="col">
+    <div id="page" class="container-fluid d-print-block">
+        <div class="card"><img src="/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/rsc/Banner Mundo E.png" style="max-width:100%;max-height: 400px;width:auto;height:auto;"></div>
+    </div>
+</div>
         </header>
 </body>
 </html>
