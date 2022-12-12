@@ -15,10 +15,10 @@ if($_SESSION['rol'] != 1){
     <title>Administrador</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Import jQuery , popper, Bootstraps JS, dataTables -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
 </head>
 <body>
@@ -80,48 +80,9 @@ if($_SESSION['rol'] != 1){
         </div>
 </div>
         </header>
-        <?php
-        $conexion=mysqli_connect('localhost','root','','proyecto');
-        $sql = "SELECT * FROM usuarios";
-        $result=mysqli_query($conexion,$sql);
-        ?>
         <table class="table table-striped" id="tablaUsuarios">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Usuario</th>
-      <th scope="col">Contraseña</th>
-      <th scope="col">Rol</th>
-      <th scope="col">Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-    while($mostrar=mysqli_fetch_array($result)){
-    ?>
-    <tr>
-    <td><?php echo $mostrar[0] ?></td>
-    <td><?php echo $mostrar[1] ?></td>
-    <td><?php echo $mostrar[2] ?></td>
-    <td><?php switch($mostrar[3]){
-      case 1: echo "Administrador";
-      break;
-      case 2: echo "Maestro";
-      break;
-      case 3: echo "Alumno";
-      break;
-      case 4: echo "Padre";
-      break;
-      default: echo "Sin asignar";
-      break;
-    } ?></td>
-    <td><input type="button" class="btn btn-danger" data-id='<?php echo $mostrar[0];?>' value="Eliminar"> | <button type="button" data-id='<?php echo $mostrar[0];?>' class="btn btn-success editbtn" data-bs-toggle="modal" data-bs-target="#modal">Editar</button></td>
-    </tr>
-    <?php
-    }
-    ?>
-  </tbody>
-</table>
+
+        </table>
 <button id="BotonAgregar" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">Agregar Nuevo Usuario</button>
 
 <!--Modal para Agregar o Editar-->
@@ -173,30 +134,27 @@ if($_SESSION['rol'] != 1){
         </div>
     </div>
 </div> 
+<script type="text/javascript">
+  fetchUser();
+  $(document).ready(function(){
+    function fetchUser(){
+      var action = "select";
+      $.ajax({
+        url: "select.php",
+        methos: "POST",
+        data: {action:action},
+        success: function(data){
+          $('#id').val('');
+          $('#username').val('');
+          $('#password').val('');
+          $('#rol').val('');
+          $('#action').val('Add');
+          $('#tablaUsuarios').html(data);
+        }
 
-<script type='text/javascript'>
-            $(document).ready(function(){
- 
-                $('.editbtn').click(function(){
-                   
-                    var user_id = $(this).data('id');
- 
-                    // AJAX request
-                    $.ajax({
-                        url: 'ajaxfile.php',
-                        type: 'post',
-                        data: {user_id: user_id},
-                        success: function(response){ 
-                            // Add response in Modal body
-                            $('.modal-body').html(response); 
- 
-                            // Display Modal
-                            $('#modal').modal('show'); 
-                        }
-                    });
-                });
-            });
-            </script>
-
+      });
+    }
+  });
+</script>
 </body>
 </html>
