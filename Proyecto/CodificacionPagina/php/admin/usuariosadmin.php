@@ -11,13 +11,16 @@ if($_SESSION['rol'] != 1){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
     <title>Pagina principal</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <!-- Bootstraps , dataTables-->
+    <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link rel="stylesheet" href="../assets/datatables/datatables.min.css">
+<link rel="stylesheet"  type="text/css" href="assets/datatables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css">    
+
+
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark fixed-top">
@@ -78,66 +81,95 @@ if($_SESSION['rol'] != 1){
         <table id="tablaUsuarios" class="table" style="width: 100%">
             <thead>
               <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Username</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido Paterno</th>
-                <th scope="col">Apellido Materno</th>
-                <th scope="col">Rol</th>
-                <th scope="col">Accion</th>
+                <th scope="col" class="text-center">ID</th>
+                <th scope="col" class="text-center">Username</th>
+                <th scope="col" class="text-center">Nombre</th>
+                <th scope="col" class="text-center">Apellido Paterno</th>
+                <th scope="col" class="text-center">Apellido Materno</th>
+                <th scope="col" class="text-center">Rol</th>
+                <th scope="col" class="text-center">Password</th>
+                <th scope="col" class="text-center">Accion</th>
               </tr>
             </thead>
             <tbody>
             </tbody>
           </table>
           <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCRUD">
-  Agregar nuevo Usuario
-</button>
+          <button id="btnNuevo" type="button" class="btn btn-primary" data-toggle="modal">Agregar usuario</button>
         </div>
 
-        <!-- Modal -->
-<div class="modal fade" id="modalCRUD" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar o Quitar Alumno</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Modal body -->
-        <div class="form-floating mb-3">
-  <input type="email" class="form-control" id="username">
-  <label for="username">Username</label>
-</div>
-<div class="form-floating mb-3">
-  <input type="password" class="form-control" id="nombre">
-  <label for="nombre">Nombre</label>
-</div>
-<div class="form-floating mb-3">
-  <input type="password" class="form-control" id="ap_paterno">
-  <label for="ap_paterno">Apellido Paterno</label>
-</div>
-<div class="form-floating mb-3">
-  <input type="password" class="form-control" id="ap_materno">
-  <label for="ap_materno">Apellido Materno</label>
-</div>
-<div class="form-floating">
-  <select class="form-select" id="rol" aria-label="Floating label select example">
-    <option value="1">Administrador</option>
-    <option value="2">Maestro</option>
-    <option value="3">Alumno</option>
-    <option value="4">Padre</option>
-  </select>
-  <label for="rol">Rol</label>
-</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
-      </div>
+       <!--Modal para CRUD-->
+<div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+            </div>
+        <form id="formUsuarios">    
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="" class="col-form-label">Username:</label>
+                    <input type="text" class="form-control" id="username">
+                    </div>
+                    </div>
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="" class="col-form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre">
+                    </div> 
+                    </div>    
+                </div>
+                <div class="row"> 
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="" class="col-form-label">Apellido Paterno</label>
+                    <input type="text" class="form-control" id="ap_paterno">
+                    </div>               
+                    </div>
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="" class="col-form-label">Apellido Materno</label>
+                    <input type="text" class="form-control" id="ap_materno">
+                    </div>
+                    </div>  
+                </div>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="form-group">
+                          <label for="rol">Rol</label>
+                        <select id="rol" class="form-select" aria-label="Default select example">
+                        <option selected>Seleccione el rol</option>
+                        <option value="1">Administrador</option>
+                        <option value="2">Maestro</option>
+                        <option value="3">Alumno</option>
+                        <option value="4">Padre</option>
+                        </select>
+                        </div>
+                        <div class="form-group">
+                        <label for="" class="col-form-label">Contraseña</label>
+                        <input type="text" class="form-control" id="password">
+                        </div>
+                    </div>    
+                </div>                
+            </div>
+            <div class="modal-footer">
+              <input type="submit" id="btnGuardar" class="btn btn-success" value="Guardar">
+          </div>
+        </form>    
+        </div>
     </div>
-  </div>
-</div>
+</div>  
+
+
+<!-- jQuery ,Popper.js, datatables JS -->
+<script src="../assets/jquery/jquery-3.3.1.min.js"></script>
+<script src="../assets/popper/popper.min.js"></script>
+<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../assets/datatables/datatables.min.js"></script>  
+
+<<script type="text/javascript" src="usuarios.js"></script> 
+
 </body>
 </html>
