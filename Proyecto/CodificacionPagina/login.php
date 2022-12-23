@@ -30,17 +30,13 @@ if(isset($_POST['usuario']) && isset($_POST['pass'])){
     $password = $_POST['pass'];
 
     $db = new Database();
-    $query = $db->connect()->prepare('SELECT *FROM usuarios WHERE usuarios_nombre = :usuario AND usuarios_pass = :pass');
+    $query = $db->connect()->prepare('SELECT *FROM usuarios WHERE username = :usuario AND password = :pass');
     $query->execute(['usuario' => $username, 'pass' => $password]);
 
     $row = $query->fetch(PDO::FETCH_NUM);
     
     if($row == true){
-        $rol = $row[3];
-        $_SESSION['usuario'] = $username;
-        $usuarioid = $row[0];
-        $_SESSION['usuarioid'] = $usuarioid;
-        
+        $rol = $row[6];        
         $_SESSION['rol'] = $rol;
         switch($rol){
           case 1:
