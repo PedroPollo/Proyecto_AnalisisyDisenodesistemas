@@ -83,11 +83,11 @@ if($_SESSION['rol'] != 1){
               <tr>
                 <th scope="col" class="text-center">ID</th>
                 <th scope="col" class="text-center">Username</th>
+                <th scope="col" class="text-center">Password</th>
                 <th scope="col" class="text-center">Nombre</th>
                 <th scope="col" class="text-center">Apellido Paterno</th>
                 <th scope="col" class="text-center">Apellido Materno</th>
                 <th scope="col" class="text-center">Rol</th>
-                <th scope="col" class="text-center">Password</th>
                 <th scope="col" class="text-center">Accion</th>
               </tr>
             </thead>

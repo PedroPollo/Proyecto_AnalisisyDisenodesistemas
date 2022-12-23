@@ -13,11 +13,11 @@ $(document).ready(function() {
         "columns":[
             {"data": "id"},
             {"data": "username"},
+            {"data": "password"},
             {"data": "nombre"},
             {"data": "ap_paterno"},
             {"data": "ap_materno"},
             {"data": "rol"},
-            {"data": "password"},
             {"defaultContent": "<div class='btn-group' role='group' aria-label='Basic mixed styles example'><button type='button' class='btn btn-danger btnBorrar'>Eliminar</button><button type='button' class='btn btn-warning btnEditar'>Editar</button>"}
         ]
     });     
@@ -25,13 +25,13 @@ $(document).ready(function() {
     var fila; //captura la fila, para editar o eliminar
 //submit para el Alta y Actualización
 $('#formUsuarios').submit(function(e){                         
-    e.preventDefault(); //evita el comportambiento normal del submit, es decir, recarga total de la página
-    username = $.trim($('#username').val());    
+   // e.preventDefault(); //evita el comportambiento normal del submit, es decir, recarga total de la página
+    username = $.trim($('#username').val());   
+    password = $.trim($('#password').val());  
     nombre = $.trim($('#nombre').val());
     ap_paterno = $.trim($('#ap_paterno').val());    
     ap_materno = $.trim($('#ap_materno').val());    
-    rol = $.trim($('#rol').val());      
-    password = $.trim($('#password'));                     
+    rol = $.trim($('#rol').val());                    
         $.ajax({
           url: "crudusuarios.php",
           type: "POST",
@@ -58,13 +58,14 @@ $('#formUsuarios').submit(function(e){
     //Editar        
     $(document).on("click", ".btnEditar", function(){		        
         opcion = 2;//editar
-        fila = $(this).closest("tr");	            
+        fila = $(this).closest("tr");	
+        user_id = fila.find('td:eq(0)')            
         username = fila.find('td:eq(1)').text();
-        nombre = fila.find('td:eq(2)').text();
-        ap_paterno = fila.find('td:eq(3)').text();
-        ap_materno = fila.find('td:eq(4)').text();
-        rol = fila.find('td:eq(5)').text();
-        password = fila.find('td:eq(6)').text();
+        password = fila.find('td:eq(2)').text();
+        nombre = fila.find('td:eq(3)').text();
+        ap_paterno = fila.find('td:eq(4)').text();
+        ap_materno = fila.find('td:eq(5)').text();
+        rol = fila.find('td:eq(6)').text();
         $("#username").val(username);
         $("#nombre").val(nombre);
         $("#ap_paterno").val(ap_paterno);
