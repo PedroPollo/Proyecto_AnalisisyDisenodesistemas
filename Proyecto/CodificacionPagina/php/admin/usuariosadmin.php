@@ -51,6 +51,9 @@ if($_SESSION['rol'] != 1){
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="materiasadmin.php">Administrar Materias</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="../../logout.php">Cerrar Sesion</a>
+          </li>
         </ul>
       </div>
     </div>
