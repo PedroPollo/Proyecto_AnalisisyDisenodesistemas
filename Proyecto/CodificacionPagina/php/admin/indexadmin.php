@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <?php 
 session_start();
 if($_SESSION['rol'] != 1){
@@ -169,12 +170,29 @@ if($_SESSION['rol'] != 1){
             </div>
         </div>
         </div>
+=======
+<?php
+require_once 'includes/header.php';
+?>
+
+<main>
+
+>>>>>>> Stashed changes
 <div class="col">
     <div id="page" class="container-fluid d-print-block">
         <div class="card"><img src="/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/rsc/Banner Mundo E.png" style="max-width:100%;max-height:100%;width:auto;height:auto;"></div>
     </div>
+<<<<<<< Updated upstream
 </div>
         </header>
 </body>
 >>>>>>> Stashed changes
 </html>
+=======
+
+</main>
+
+<?php
+require_once 'includes/footer.php';
+?>
+>>>>>>> Stashed changes
