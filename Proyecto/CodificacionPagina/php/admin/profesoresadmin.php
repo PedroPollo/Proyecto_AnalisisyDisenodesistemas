@@ -43,10 +43,10 @@ if($_SESSION['rol'] != 1){
             <a class="nav-link" aria-current="page" href="indexadmin.php">Pagina principal</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="usuariosadmin.php">Administrar Usuarios</a>
+            <a class="nav-link" aria-current="page" href="usuariosadmin.php">Administrar Usuarios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="profesoresadmin.php">Administrar Profesores</a>
+            <a class="nav-link active" aria-current="page" href="profesoresadmin.php">Administrar Profesores</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="alumnosadmin.php">Administrar Alumnos</a>
@@ -80,15 +80,12 @@ if($_SESSION['rol'] != 1){
         </div>
         </div>
         </header>
-        <div class="container caja">
-        <table id="tablaUsuarios" class="table" style="width: 100%">
-            <thead>
-            <div class="col-12 pt-3 pb-3">
+        <div class="col-12 pt-3 pb-3">
     <div class="card ">
         <div class="card-body ">
             <div class="d-sm-flex align-items-center">
                 <div class="mr-auto">
-                    <div class="page-context-header"><div class="page-header-headings"><h1>Administrar Usuarios</h1></div></div>
+                    <div class="page-context-header"><div class="page-header-headings"><h1>Administrar Profesores</h1></div></div>
                 </div>
 
                 <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
@@ -105,14 +102,18 @@ if($_SESSION['rol'] != 1){
         </div>
     </div>
 </div>
+        <div class="container caja">
+        <table id="tablaProfesores" class="table" style="width: 100%">
+            <thead>
               <tr>
                 <th scope="col" class="text-center">ID</th>
-                <th scope="col" class="text-center">Username</th>
-                <th scope="col" class="text-center">Password</th>
                 <th scope="col" class="text-center">Nombre</th>
-                <th scope="col" class="text-center">Apellido Paterno</th>
-                <th scope="col" class="text-center">Apellido Materno</th>
-                <th scope="col" class="text-center">Rol</th>
+                <th scope="col" class="text-center">Direccion</th>
+                <th scope="col" class="text-center">Cedula</th>
+                <th scope="col" class="text-center">Clave</th>
+                <th scope="col" class="text-center">Telefono</th>
+                <th scope="col" class="text-center">Correo</th>
+                <th scope="col" class="text-center">Nivel de Estudios</th>
                 <th scope="col" class="text-center">Accion</th>
               </tr>
             </thead>
@@ -130,53 +131,57 @@ if($_SESSION['rol'] != 1){
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"></h5>
             </div>
-        <form id="formUsuarios">    
+        <form id="formProfesores">    
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="" class="col-form-label">Username:</label>
-                    <input type="text" class="form-control" id="username">
+                    <label for="" class="col-form-label">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre">
                     </div>
                     </div>
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="" class="col-form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre">
+                    <label for="" class="col-form-label">Direccion:</label>
+                    <input type="text" class="form-control" id="direccion">
                     </div> 
                     </div>    
                 </div>
                 <div class="row"> 
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="ap_paterno" class="col-form-label">Apellido Paterno</label>
-                    <input type="text" class="form-control" id="ap_paterno">
+                    <label for="" class="col-form-label">Cedula:</label>
+                    <input type="text" class="form-control" id="cedula">
                     </div>               
                     </div>
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="ap_materno" class="col-form-label">Apellido Materno</label>
-                    <input type="text" class="form-control" id="ap_materno">
+                    <label for="" class="col-form-label">Clave</label>
+                    <input type="text" class="form-control" id="clave">
                     </div>
                     </div>  
                 </div>
                 <div class="row">
                     <div class="col-lg-9">
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="" class="col-form-label">Telefono</label>
+                    <input type="text" class="form-control" id="telefono">
+                    </div>
+                    </div>  
                         <div class="form-group">
-                          <label for="rol">Rol</label>
-                        <select id="rol" class="form-select" aria-label="Default select example">
-                        <option selected>Seleccione el rol</option>
-                        <option value="1">Administrador</option>
-                        <option value="2">Maestro</option>
-                        <option value="3">Alumno</option>
-                        <option value="4">Padre</option>
-                        </select>
-                        </div>
-                        <div class="form-group">
-                        <label for="" class="col-form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password">
+                        <label for="" class="col-form-label">Correo</label>
+                        <input type="text" class="form-control" id="correo">
                         </div>
                     </div>    
+                </div>
+                <div class="row">
+                    <div class="col-lg-9">
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="" class="col-form-label">Nivel de Estudio</label>
+                    <input type="text" class="form-control" id="nivel_est">
+                    </div>   
                 </div>                
             </div>
             <div class="modal-footer">
@@ -194,7 +199,7 @@ if($_SESSION['rol'] != 1){
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../assets/datatables/datatables.min.js"></script>  
 
-<script type="text/javascript" src="usuarios.js"></script> 
+<script type="text/javascript" src="profesores.js"></script> 
 
 </body>
 </html>

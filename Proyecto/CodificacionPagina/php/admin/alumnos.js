@@ -3,42 +3,42 @@ $(document).ready(function() {
     opcion = 4;   
 
     
-    tablaUsuarios = $('#tablaUsuarios').DataTable({  
+    tablaAlumnos = $('#tablaAlumnos').DataTable({  
         "ajax":{            
-            "url": "crudusuarios.php", 
+            "url": "crudalumnos.php", 
             "method": 'POST', //usamos el metodo POST
             "data":{opcion:opcion}, //enviamos opcion 4 para que haga un SELECT
             "dataSrc":""
         },
         "columns":[
-            {"data": "id"},
-            {"data": "username"},
-            {"data": "password"},
-            {"data": "nombre"},
-            {"data": "ap_paterno"},
-            {"data": "ap_materno"},
-            {"data": "rol"},
-            {"defaultContent": "<div class='btn-group' role='group' aria-label='Basic mixed styles example'><button type='button' class='btn btn-danger btnBorrar'>Eliminar</button><button type='button' class='btn btn-warning btnEditar'>Editar</button>"}
+            {"data": "alumno_id"},
+            {"data": "nombre_alumnno"},
+            {"data": "edad"},
+            {"data": "direccion"},
+            {"data": "cedula"},
+            {"data": "correo"},
+            {"data": "fecha_registro"},
+            {"defaultContent": "<div class='btn-group' correo='group' aria-label='Basic mixed styles example'><button type='button' class='btn btn-danger btnBorrar'>Eliminar</button><button type='button' class='btn btn-warning btnEditar'>Editar</button>"}
         ]
     });     
      
     var fila; //captura la fila, para editar o eliminar
 //submit para el Alta y Actualización
-$('#formUsuarios').submit(function(e){                         
+$('#formAlumno').submit(function(e){                         
     e.preventDefault(); //evita el comportambiento normal del submit, es decir, recarga total de la página
-    username = $.trim($('#username').val());   
-    password = $.trim($('#password').val());  
-    nombre = $.trim($('#nombre').val());
-    ap_paterno = $.trim($('#ap_paterno').val());    
-    ap_materno = $.trim($('#ap_materno').val());    
-    rol = $.trim($('#rol').val());                    
+    nombre = $.trim($('#nombre').val());   
+    direccion = $.trim($('#direccion').val());  
+    cedula = $.trim($('#cedula').val());
+    edad = $.trim($('#age').val());    
+    correo = $.trim($('#correo').val());  
+    fecha_reg = $.trim($('#fecha_reg').val());                   
         $.ajax({
-          url: "crudusuarios.php",
+          url: "crudalumnos.php",
           type: "POST",
           datatype:"json",    
-          data:  {user_id:user_id, username:username, nombre:nombre, ap_paterno:ap_paterno, ap_materno:ap_materno, rol:rol ,opcion:opcion, password:password},    
+          data:  {user_id:user_id, nombre:nombre, cedula:cedula, edad:edad, correo:correo ,opcion:opcion, direccion:direccion, fecha_reg:fecha_reg},    
           success: function(data) {
-            tablaUsuarios.ajax.reload(null, false);
+            tablaAlumnos.ajax.reload(null, false);
            }
         });			        
     $('#modalCRUD').modal('hide');											     			
@@ -48,10 +48,10 @@ $('#formUsuarios').submit(function(e){
     $("#btnNuevo").click(function(){
         opcion = 1; //alta           
         user_id=null;
-        $("#formUsuarios").trigger("reset");
+        $("#formAlumnos").trigger("reset");
         $(".modal-header").css( "background-color", "#fff");
         $(".modal-header").css( "color", "black" );
-        $(".modal-title").text("Alta de Usuario");
+        $(".modal-title").text("Alta de Alumno");
         $('#modalCRUD').modal('show');		    
     });
     
@@ -59,22 +59,22 @@ $('#formUsuarios').submit(function(e){
     $(document).on("click", ".btnEditar", function(){		        
         opcion = 2;//editar
         fila = $(this).closest("tr");	
-        user_id = parseInt($(this).closest('tr').find('td:eq(0)').text()) ;         
-        username = fila.find('td:eq(1)').text();
-        password = fila.find('td:eq(2)').text();
-        nombre = fila.find('td:eq(3)').text();
-        ap_paterno = fila.find('td:eq(4)').text();
-        ap_materno = fila.find('td:eq(5)').text();
-        rol = fila.find('td:eq(6)').text();
-        $("#username").val(username);
+        user_id = fila.find('td:eq(0)')            
+        nombre = fila.find('td:eq(1)').text();
+        direccion = fila.find('td:eq(3)').text();
+        cedula = fila.find('td:eq(4)').text();
+        edad = fila.find('td:eq(2)').text();
+        correo = fila.find('td:eq(5)').text();
+        fecha_reg = fila.find('td:eq(6)').text();
         $("#nombre").val(nombre);
-        $("#ap_paterno").val(ap_paterno);
-        $("#ap_materno").val(ap_materno);
-        $("#rol").val(rol);
-        $("#password").val(password);
+        $("#cedula").val(cedula);
+        $("#age").val(edad);
+        $("#correo").val(correo);
+        $("#direccion").val(direccion);
+        $("#fecha_reg").val(fecha_reg);
         $(".modal-header").css("background-color", "#fff");
         $(".modal-header").css("color", "black" );
-        $(".modal-title").text("Editar Usuario");		
+        $(".modal-title").text("Editar Alumno");		
         $('#modalCRUD').modal('show');		   
     });
     
@@ -86,12 +86,12 @@ $('#formUsuarios').submit(function(e){
         var respuesta = confirm("¿Está seguro de borrar el registro "+user_id+"?");                
         if (respuesta) {            
             $.ajax({
-              url: "crudusuarios.php",
+              url: "crudalumnos.php",
               type: "POST",
               datatype:"json",    
               data:  {opcion:opcion, user_id:user_id},    
               success: function() {
-                  tablaUsuarios.row(fila.parents('tr')).remove().draw();                  
+                  tablaAlumnos.row(fila.parents('tr')).remove().draw();                  
                }
             });	
         }

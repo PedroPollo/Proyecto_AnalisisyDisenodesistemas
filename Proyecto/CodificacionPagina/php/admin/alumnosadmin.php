@@ -80,15 +80,12 @@ if($_SESSION['rol'] != 1){
         </div>
         </div>
         </header>
-        <div class="container caja">
-        <table id="tablaUsuarios" class="table" style="width: 100%">
-            <thead>
-            <div class="col-12 pt-3 pb-3">
+        <div class="col-12 pt-3 pb-3">
     <div class="card ">
         <div class="card-body ">
             <div class="d-sm-flex align-items-center">
                 <div class="mr-auto">
-                    <div class="page-context-header"><div class="page-header-headings"><h1>Administrar Usuarios</h1></div></div>
+                    <div class="page-context-header"><div class="page-header-headings"><h1>Administrar Alumnos</h1></div></div>
                 </div>
 
                 <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
@@ -105,14 +102,16 @@ if($_SESSION['rol'] != 1){
         </div>
     </div>
 </div>
+        <div class="container caja">
+        <table id="tablaAlumnos" class="table" style="width: 100%">
+            <thead>
               <tr>
                 <th scope="col" class="text-center">ID</th>
-                <th scope="col" class="text-center">Username</th>
-                <th scope="col" class="text-center">Password</th>
                 <th scope="col" class="text-center">Nombre</th>
-                <th scope="col" class="text-center">Apellido Paterno</th>
-                <th scope="col" class="text-center">Apellido Materno</th>
-                <th scope="col" class="text-center">Rol</th>
+                <th scope="col" class="text-center">Edad</th>
+                <th scope="col" class="text-center">Cedula</th>
+                <th scope="col" class="text-center">Correo</th>
+                <th scope="col" class="text-center">Fecha de registro</th>
                 <th scope="col" class="text-center">Accion</th>
               </tr>
             </thead>
@@ -120,7 +119,7 @@ if($_SESSION['rol'] != 1){
             </tbody>
           </table>
           <!-- Button trigger modal -->
-          <button id="btnNuevo" type="button" class="btn btn-primary" data-toggle="modal">Agregar usuario</button>
+          <button id="btnNuevo" type="button" class="btn btn-primary" data-toggle="modal">Agregar Alumno</button>
         </div>
 
        <!--Modal para CRUD-->
@@ -130,51 +129,43 @@ if($_SESSION['rol'] != 1){
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"></h5>
             </div>
-        <form id="formUsuarios">    
+        <form id="formAlumnos">    
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="" class="col-form-label">Username:</label>
-                    <input type="text" class="form-control" id="username">
+                    <label for="" class="col-form-label">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre">
                     </div>
                     </div>
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="" class="col-form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre">
+                    <label for="" class="col-form-label">Edad:</label>
+                    <input type="text" class="form-control" id="age">
                     </div> 
                     </div>    
                 </div>
                 <div class="row"> 
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="ap_paterno" class="col-form-label">Apellido Paterno</label>
-                    <input type="text" class="form-control" id="ap_paterno">
+                    <label for="cedula" class="col-form-label">Cedula</label>
+                    <input type="text" class="form-control" id="cedula">
                     </div>               
                     </div>
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="ap_materno" class="col-form-label">Apellido Materno</label>
-                    <input type="text" class="form-control" id="ap_materno">
+                    <label for="correo" class="col-form-label">Correo</label>
+                    <input type="text" class="form-control" id="correo">
                     </div>
                     </div>  
                 </div>
                 <div class="row">
                     <div class="col-lg-9">
                         <div class="form-group">
-                          <label for="rol">Rol</label>
-                        <select id="rol" class="form-select" aria-label="Default select example">
-                        <option selected>Seleccione el rol</option>
-                        <option value="1">Administrador</option>
-                        <option value="2">Maestro</option>
-                        <option value="3">Alumno</option>
-                        <option value="4">Padre</option>
-                        </select>
                         </div>
                         <div class="form-group">
-                        <label for="" class="col-form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password">
+                        <label for="fecha_reg" class="col-form-label">Fecha de Registro</label>
+                        <input type="date" name="fecha_reg" id="fecha_reg" class="form-control form-control-date">
                         </div>
                     </div>    
                 </div>                
@@ -194,7 +185,7 @@ if($_SESSION['rol'] != 1){
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../assets/datatables/datatables.min.js"></script>  
 
-<script type="text/javascript" src="usuarios.js"></script> 
+<script type="text/javascript" src="alumnos.js"></script> 
 
 </body>
 </html>
