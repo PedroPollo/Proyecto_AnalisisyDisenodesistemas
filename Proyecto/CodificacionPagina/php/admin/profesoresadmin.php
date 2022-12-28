@@ -156,7 +156,7 @@ if($_SESSION['rol'] != 1){
                     </div>
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="" class="col-form-label">Clave</label>
+                    <label for="" class="col-form-label">Clave:</label>
                     <input type="text" class="form-control" id="clave">
                     </div>
                     </div>  
@@ -165,12 +165,12 @@ if($_SESSION['rol'] != 1){
                     <div class="col-lg-9">
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="" class="col-form-label">Telefono</label>
+                    <label for="" class="col-form-label">Telefono:</label>
                     <input type="text" class="form-control" id="telefono">
                     </div>
                     </div>  
                         <div class="form-group">
-                        <label for="" class="col-form-label">Correo</label>
+                        <label for="" class="col-form-label">Correo:</label>
                         <input type="text" class="form-control" id="correo">
                         </div>
                     </div>    
@@ -179,13 +179,13 @@ if($_SESSION['rol'] != 1){
                     <div class="col-lg-9">
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="" class="col-form-label">Nivel de Estudio</label>
+                    <label for="" class="col-form-label">Nivel de Estudio:</label>
                     <input type="text" class="form-control" id="nivel_est">
                     </div>   
                 </div>                
             </div>
             <div class="modal-footer">
-              <input type="submit" id="btnGuardar" class="btn btn-success" value="Guardar">
+              <input type="button" id="btnGuardar" class="btn btn-success" value="Guardar">
           </div>
         </form>    
         </div>

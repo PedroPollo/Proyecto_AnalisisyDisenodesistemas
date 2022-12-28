@@ -43,13 +43,13 @@ if($_SESSION['rol'] != 1){
             <a class="nav-link" aria-current="page" href="indexadmin.php">Pagina principal</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="usuariosadmin.php">Administrar Usuarios</a>
+            <a class="nav-link" aria-current="page" href="usuariosadmin.php">Administrar Usuarios</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="profesoresadmin.php">Administrar Profesores</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="alumnosadmin.php">Administrar Alumnos</a>
+            <a class="nav-link active" aria-current="page" href="alumnosadmin.php">Administrar Alumnos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="../../logout.php">Cerrar Sesion</a>
