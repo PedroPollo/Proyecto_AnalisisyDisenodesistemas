@@ -80,6 +80,8 @@ if($_SESSION['rol'] != 1){
         </div>
         </div>
         </header>
+        <div class="container caja">
+        <table id="tablaProfesores" class="table" style="width: 100%">
         <div class="col-12 pt-3 pb-3">
     <div class="card ">
         <div class="card-body ">
@@ -102,8 +104,6 @@ if($_SESSION['rol'] != 1){
         </div>
     </div>
 </div>
-        <div class="container caja">
-        <table id="tablaProfesores" class="table" style="width: 100%">
             <thead>
               <tr>
                 <th scope="col" class="text-center">ID</th>
