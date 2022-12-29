@@ -52,6 +52,21 @@ if($_SESSION['rol'] != 1){
             <a class="nav-link" aria-current="page" href="alumnosadmin.php">Administrar Alumnos</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="gradosadmin.php">Administrar Grados</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="aulasadmin.php">Administrar Aulas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="materiasadmin.php">Administrar Materias</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="periodosadmin.php">Administrar Periodo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="actividadadmin.php">Administrar Actividad</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" aria-current="page" href="../../logout.php">Cerrar Sesion</a>
           </li>
         </ul>
@@ -185,7 +200,7 @@ if($_SESSION['rol'] != 1){
                 </div>                
             </div>
             <div class="modal-footer">
-              <input type="button" id="btnGuardar" class="btn btn-success" value="Guardar">
+              <input type="submit" id="btnGuardar" class="btn btn-success" value="Guardar">
           </div>
         </form>    
         </div>

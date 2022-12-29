@@ -3,45 +3,39 @@ include_once '../../conexion.php';
 $objeto = new Conexion();
 $conexion = $objeto->Conectar();
 
-$nombre = (isset($_POST['nombre'])) ? $_POST['nombre'] : '';
-$direccion = (isset($_POST['direccion'])) ? $_POST['direccion'] : '';
-$cedula = (isset($_POST['cedula'])) ? $_POST['cedula'] : '';
-$clave = (isset($_POST['clave'])) ? $_POST['clave'] : '';
-$telefono = (isset($_POST['telefono'])) ? $_POST['telefono'] : '';
-$correo = (isset($_POST['correo'])) ? $_POST['correo'] : '';
-$nivel_est = (isset($_POST['nivel_est'])) ? $_POST['nivel_est'] : '';
+$grado = (isset($_POST['grado'])) ? $_POST['grado'] : '';
 
 $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
 $user_id = (isset($_POST['user_id'])) ? $_POST['user_id'] : '';
 
 switch($opcion){
     case 1:
-        $consulta = "INSERT INTO `profesor`(`nombre`, `direccion`, `cedula`, `clave`, `telefono`, `correo`, `nivel_est`) VALUES('$nombre','$direccion', '$cedula', '$clave', '$telefono', '$correo', '$nivel_est') ";			
+        $consulta = "INSERT INTO `grados`(`nombre_grado`) VALUES ('$grado')";			
         $resultado = $conexion->prepare($consulta);
         $resultado->execute(); 
         
-        $consulta = "SELECT * FROM profesor ORDER BY profesor_id DESC LIMIT 1";
+        $consulta = "SELECT * FROM grados ORDER BY grado_id DESC LIMIT 1";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);       
         break;    
     case 2:        
-        $consulta = "UPDATE `profesor` SET `nombre`='$nombre',`direccion`='$direccion',`cedula`='$cedula',`clave`='$clave',`telefono`='$telefono',`correo`='$correo', `nivel_est`='$nivel_est' WHERE profesor_id='$user_id' ";		
+        $consulta = "UPDATE `grados` SET `nombre_grado`='$grado' WHERE `grado_id`='$user_id'";		
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();        
         
-        $consulta = "SELECT * FROM profesor WHERE profesor_id='$user_id' ";       
+        $consulta = "SELECT * FROM alumnos WHERE alumno_id='$user_id' ";       
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
         break;
     case 3:        
-        $consulta = "DELETE FROM profesor WHERE profesor_id='$user_id' ";		
+        $consulta = "DELETE FROM grados WHERE grado_id='$user_id' ";		
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();                           
         break;
     case 4:    
-        $consulta = "SELECT * FROM profesor";
+        $consulta = "SELECT * FROM grados";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();        
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
