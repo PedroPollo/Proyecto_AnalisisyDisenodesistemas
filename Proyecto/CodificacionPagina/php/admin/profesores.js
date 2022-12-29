@@ -19,7 +19,7 @@ $(document).ready(function() {
             {"data": "telefono"},
             {"data": "correo"},
             {"data": "nivel_est"},
-            {"defaultContent": "<div class='btn-group' correo='group' aria-label='Basic mixed styles example'><button type='button' class='btn btn-danger btnBorrar'>Eliminar</button><button type='button' class='btn btn-warning btnEditar'>Editar</button>"}
+            {"defaultContent": "<div class='btn-group' correo='group' aria-label='Basic mixed styles example'><button type='button' class='btn btn-danger btnBorrar'>Eliminar</button><button type='button' class='btn btn-warning btnEditar' disabled>Editar</button>"}
         ]
     });     
      

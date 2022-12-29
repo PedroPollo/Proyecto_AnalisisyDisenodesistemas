@@ -4,6 +4,9 @@ if($_SESSION['rol'] != 1){
   header('location: ../../index.php');
 }
 
+$conexion = mysqli_connect("localhost","root","","proyecto");
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -46,7 +49,7 @@ if($_SESSION['rol'] != 1){
             <a class="nav-link" aria-current="page" href="usuariosadmin.php">Administrar Usuarios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="profesoresadmin.php">Administrar Profesores</a>
+            <a class="nav-link" aria-current="page" href="profesoresadmin.php">Administrar Profesores</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="alumnosadmin.php">Administrar Alumnos</a>
@@ -67,7 +70,7 @@ if($_SESSION['rol'] != 1){
             <a class="nav-link " aria-current="page" href="actividadadmin.php">Administrar Actividad</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="profmatadadmin.php">Administrar Profesores Materias</a>
+            <a class="nav-link active" aria-current="page" href="profmatadadmin.php">Administrar Profesores Materias</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="../../logout.php">Cerrar Sesion</a>
@@ -99,13 +102,13 @@ if($_SESSION['rol'] != 1){
         </div>
         </header>
         <div class="container caja">
-        <table id="tablaProfesores" class="table" style="width: 100%">
+        <table id="tablaprofmat" class="table" style="width: 100%">
         <div class="col-12 pt-3 pb-3">
     <div class="card ">
         <div class="card-body ">
             <div class="d-sm-flex align-items-center">
                 <div class="mr-auto">
-                    <div class="page-context-header"><div class="page-header-headings"><h1>Administrar Profesores</h1></div></div>
+                    <div class="page-context-header"><div class="page-header-headings"><h1>Administrar Profesores Materias</h1></div></div>
                 </div>
 
                 <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
@@ -125,13 +128,11 @@ if($_SESSION['rol'] != 1){
             <thead>
               <tr>
                 <th scope="col" class="text-center">ID</th>
-                <th scope="col" class="text-center">Nombre</th>
-                <th scope="col" class="text-center">Direccion</th>
-                <th scope="col" class="text-center">Cedula</th>
-                <th scope="col" class="text-center">Clave</th>
-                <th scope="col" class="text-center">Telefono</th>
-                <th scope="col" class="text-center">Correo</th>
-                <th scope="col" class="text-center">Nivel de Estudios</th>
+                <th scope="col" class="text-center">Profesor</th>
+                <th scope="col" class="text-center">Grado</th>
+                <th scope="col" class="text-center">Aula</th>
+                <th scope="col" class="text-center">Materia</th>
+                <th scope="col" class="text-center">Periodo</th>
                 <th scope="col" class="text-center">Accion</th>
               </tr>
             </thead>
@@ -149,33 +150,75 @@ if($_SESSION['rol'] != 1){
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"></h5>
             </div>
-        <form id="formProfesores">    
+        <form id="formprofmat">    
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="" class="col-form-label">Nombre:</label>
-                    <input type="text" class="form-control" id="nombre">
+                        <?php
+                        $sql1 = "SELECT profesor.profesor_id,profesor.nombre FROM profesor;";
+                        $resultado = mysqli_query($conexion,$sql1);
+                        ?>
+                    <label for="nombre" class="col-form-label">Profesor:</label>
+                    <select class="form-select" aria-label="Default select example" id="nombre">
+                        <option selected></option>
+                        <?php
+                        while($row = mysqli_fetch_array($resultado)){
+                            echo '  <option value="'.$row[0].'">'.$row[1].'</option>';
+                        }
+                        mysqli_free_result($resultado);
+                        ?>
+                    </select>
                     </div>
                     </div>
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="" class="col-form-label">Direccion:</label>
-                    <input type="text" class="form-control" id="direccion">
+                    <label for="grado" class="col-form-label">Grado:</label>
+                    <select class="form-select" aria-label="Default select example" id="grado">
+                        <option selected></option>
+                        <?php
+                        $sql2 = "SELECT * FROM grados;";
+                        $resultado = mysqli_query($conexion,$sql2);
+                        while($row = mysqli_fetch_array($resultado)){
+                            echo '  <option value="'.$row[0].'">'.$row[1].'</option>';
+                        }
+                        mysqli_free_result($resultado);
+                        ?>
+                    </select>
                     </div> 
                     </div>    
                 </div>
                 <div class="row"> 
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="" class="col-form-label">Cedula:</label>
-                    <input type="text" class="form-control" id="cedula">
+                    <label for="aula" class="col-form-label">Aula:</label>
+                    <select class="form-select" aria-label="Default select example" id="aula">
+                        <option selected></option>
+                        <?php
+                        $sql3 = "SELECT * FROM aulas;";
+                        $resultado = mysqli_query($conexion,$sql3);
+                        while($row = mysqli_fetch_array($resultado)){
+                            echo '  <option value="'.$row[0].'">'.$row[1].'</option>';
+                        }
+                        mysqli_free_result($resultado);
+                        ?>
+                    </select>
                     </div>               
                     </div>
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="" class="col-form-label">Clave:</label>
-                    <input type="text" class="form-control" id="clave">
+                    <label for="materia" class="col-form-label">Materia:</label>
+                    <select class="form-select" aria-label="Default select example" id="materia">
+                        <option selected></option>
+                        <?php
+                        $sql4 = "SELECT * FROM materias;";
+                        $resultado = mysqli_query($conexion,$sql4);
+                        while($row = mysqli_fetch_array($resultado)){
+                            echo '  <option value="'.$row[0].'">'.$row[1].'</option>';
+                        }
+                        mysqli_free_result($resultado);
+                        ?>
+                    </select>
                     </div>
                     </div>  
                 </div>
@@ -183,24 +226,24 @@ if($_SESSION['rol'] != 1){
                     <div class="col-lg-9">
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="" class="col-form-label">Telefono:</label>
-                    <input type="text" class="form-control" id="telefono">
+                    <label for="periodo" class="col-form-label">Periodo:</label>
+                    <select class="form-select" aria-label="Default select example" id="periodo">
+                        <option selected></option>
+                        <?php
+                        $sql5 = "SELECT * FROM periodos;";
+                        $resultado = mysqli_query($conexion,$sql5);
+                        while($row = mysqli_fetch_array($resultado)){
+                            echo '  <option value="'.$row[0].'">'.$row[1].'</option>';
+                        }
+                        mysqli_free_result($resultado);
+                        ?>
+                    </select>
                     </div>
                     </div>  
-                        <div class="form-group">
-                        <label for="" class="col-form-label">Correo:</label>
-                        <input type="text" class="form-control" id="correo">
-                        </div>
+                        
                     </div>    
                 </div>
-                <div class="row">
-                    <div class="col-lg-9">
-                    <div class="col-lg-6">
-                    <div class="form-group">
-                    <label for="" class="col-form-label">Nivel de Estudio:</label>
-                    <input type="text" class="form-control" id="nivel_est">
-                    </div>   
-                </div>                
+                              
             </div>
             <div class="modal-footer">
               <input type="submit" id="btnGuardar" class="btn btn-success" value="Guardar">
@@ -217,7 +260,7 @@ if($_SESSION['rol'] != 1){
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../assets/datatables/datatables.min.js"></script>  
 
-<script type="text/javascript" src="profesores.js"></script> 
+<script type="text/javascript" src="profmat.js"></script> 
 
 </body>
 </html>
