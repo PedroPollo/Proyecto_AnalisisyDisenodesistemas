@@ -3,11 +3,11 @@ $(document).ready(function() {
     opcion = 4;   
 
     
-    tablaEvaluaicon = $('#tablaEvaluaicon').DataTable({  
+    tablaEvaluaciones = $('#tablaEvaluaciones').DataTable({  
         "ajax":{            
-            "url": "crudusuarios.php", 
+            "url": "crudevaluaciones.php", 
             "method": 'POST', //usamos el metodo POST
-            "data":{opcion:opcion}, //enviamos opcion 4 para que haga un SELECT
+            "data":{opcion:opcion,contenido:contenido}, //enviamos opcion 4 para que haga un SELECT
             "dataSrc":""
         },
         "columns":[
@@ -16,27 +16,25 @@ $(document).ready(function() {
             {"data": "descripcion"},
             {"data": "fecha"},
             {"data": "porcentaje"},
-            {"defaultContent": "<div class='btn-group' role='group' aria-label='Basic mixed styles example'><button type='button' class='btn btn-danger btnBorrar'>Eliminar</button><button type='button' class='btn btn-warning btnEditar'>Editar</button>"}
+            {"defaultContent": "<div class='btn-group' fech_rege='group' aria-label='Basic mixed styles example'><button type='button' class='btn btn-danger btnBorrar'>Eliminar</button><button type='button' class='btn btn-warning btnEditar'>Editar</button><button type='button' class='btn btn-success btnCalificar'>Ver entregas</button></div>"}
         ]
     });     
      
     var fila; //captura la fila, para editar o eliminar
 //submit para el Alta y Actualización
-$('#formEvaluacion').submit(function(e){                         
+$('#formEvaluaciones').submit(function(e){                         
     e.preventDefault(); //evita el comportambiento normal del submit, es decir, recarga total de la página
-    username = $.trim($('#username').val());   
-    password = $.trim($('#password').val());  
-    nombre = $.trim($('#nombre').val());
-    ap_paterno = $.trim($('#ap_paterno').val());    
-    ap_materno = $.trim($('#ap_materno').val());    
-    rol = $.trim($('#rol').val());                    
+    titulo = $.trim($('#titulo').val());   
+    fecha = $.trim($('#fecha').val());  
+    descripcion = $.trim($('#descripcion').val()); 
+    porcentaje = $.trim($('#porcentaje').val()); 
         $.ajax({
-          url: "crudusuarios.php",
+          url: "crudevaluaciones.php",
           type: "POST",
           datatype:"json",    
-          data:  {user_id:user_id, username:username, nombre:nombre, ap_paterno:ap_paterno, ap_materno:ap_materno, rol:rol ,opcion:opcion, password:password},    
+          data:  {user_id:user_id, titulo:titulo, descripcion:descripcion,opcion:opcion, fecha:fecha, porcentaje:porcentaje,contenido:contenido},    
           success: function(data) {
-            tablaEvaluaicon.ajax.reload(null, false);
+            tablaEvaluaciones.ajax.reload(null, false);
            }
         });			        
     $('#modalCRUD').modal('hide');											     			
@@ -46,10 +44,10 @@ $('#formEvaluacion').submit(function(e){
     $("#btnNuevo").click(function(){
         opcion = 1; //alta           
         user_id=null;
-        $("#formEvaluacion").trigger("reset");
+        $("#formEvaluaciones").trigger("reset");
         $(".modal-header").css( "background-color", "#fff");
         $(".modal-header").css( "color", "black" );
-        $(".modal-title").text("Alta de Usuario");
+        $(".modal-title").text("Agregar Evaluacion");
         $('#modalCRUD').modal('show');		    
     });
     
@@ -58,21 +56,17 @@ $('#formEvaluacion').submit(function(e){
         opcion = 2;//editar
         fila = $(this).closest("tr");	
         user_id = parseInt($(this).closest('tr').find('td:eq(0)').text()) ;         
-        username = fila.find('td:eq(1)').text();
-        password = fila.find('td:eq(2)').text();
-        nombre = fila.find('td:eq(3)').text();
-        ap_paterno = fila.find('td:eq(4)').text();
-        ap_materno = fila.find('td:eq(5)').text();
-        rol = fila.find('td:eq(6)').text();
-        $("#username").val(username);
-        $("#nombre").val(nombre);
-        $("#ap_paterno").val(ap_paterno);
-        $("#ap_materno").val(ap_materno);
-        $("#rol").val(rol);
-        $("#password").val(password);
+        titulo = fila.find('td:eq(1)').text();
+        fecha = fila.find('td:eq(3)').text();
+        descripcion = fila.find('td:eq(2)').text();
+        porcentaje = fila.find('td:eq(4)').text();
+        $("#titulo").val(titulo);
+        $("#fecha").val(fecha);
+        $("#descripcion").val(descripcion);
+        $("#porcentaje").val(porcentaje);
         $(".modal-header").css("background-color", "#fff");
         $(".modal-header").css("color", "black" );
-        $(".modal-title").text("Editar Usuario");		
+        $(".modal-title").text("Editar Evaluacion");		
         $('#modalCRUD').modal('show');		   
     });
     
@@ -84,15 +78,21 @@ $('#formEvaluacion').submit(function(e){
         var respuesta = confirm("¿Está seguro de borrar el registro "+user_id+"?");                
         if (respuesta) {            
             $.ajax({
-              url: "crudusuarios.php",
+              url: "crudevaluaciones.php",
               type: "POST",
               datatype:"json",    
               data:  {opcion:opcion, user_id:user_id},    
               success: function() {
-                  tablaEvaluaicon.row(fila.parents('tr')).remove().draw();                  
+                  tablaEvaluaciones.row(fila.parents('tr')).remove().draw();                  
                }
             });	
         }
+     });
+
+     $(document).on("click",".btnCalificar",function(){
+        fila=$(this);
+        user_id = parseInt($(this).closest('tr').find('td:eq(0)').text());
+        location.href = "entregas.php?evaluacion="+user_id;
      });
          
     });    

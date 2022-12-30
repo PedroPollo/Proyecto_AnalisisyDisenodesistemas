@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     var user_id, opcion;
     opcion = 4;   
@@ -90,7 +89,7 @@ $('#formContenidos').submit(function(e){
      $(document).on("click",".btnCalificar",function(){
         fila=$(this);
         user_id = parseInt($(this).closest('tr').find('td:eq(0)').text());
-        location.href = "calificar.php?contenido="+user_id;
+        location.href = "evaluaciones.php?contenido="+user_id;
      });
          
     });    

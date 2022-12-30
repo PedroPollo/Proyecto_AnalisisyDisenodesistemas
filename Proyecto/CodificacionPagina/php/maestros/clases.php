@@ -89,7 +89,7 @@ mysqli_free_result($resultado);
       <?php 
       while ($row = mysqli_fetch_array($resultado)){
       ?>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
           <div class="card" style="width: 18rem;">
           <img src="/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/rsc/image.png" class="card-img-top">
           <div class="card-body">

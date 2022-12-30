@@ -131,8 +131,9 @@ if($_SESSION['rol'] != 1){
                 <th scope="col" class="text-center">Nombre</th>
                 <th scope="col" class="text-center">Edad</th>
                 <th scope="col" class="text-center">Cedula</th>
+                <th scope="col" class="text-center">Clave</th>
                 <th scope="col" class="text-center">Correo</th>
-                <th scope="col" class="text-center">Fecha de registro</th>
+                <th scope="col" class="text-center">Fecha de registro</th>               
                 <th scope="col" class="text-center">Accion</th>
               </tr>
             </thead>
@@ -188,7 +189,13 @@ if($_SESSION['rol'] != 1){
                     <input type="date" class="form-control form-control-date" id="fech_reg">
                     </div>
                     </div>  
-                        
+                    <div class="col-lg-9">
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="clave" class="col-form-label">Clave:</label>
+                    <input type="text" class="form-control form-control-date" id="clave">
+                    </div>
+                    </div> 
                     </div>    
                 </div>
                               

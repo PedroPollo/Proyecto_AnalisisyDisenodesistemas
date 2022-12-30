@@ -15,6 +15,7 @@ $(document).ready(function() {
             {"data": "nombre_alumno"},
             {"data": "edad"},
             {"data": "cedula"},
+            {"data": "clave"},
             {"data": "correo"},
             {"data": "fecha_registro"},
             {"defaultContent": "<div class='btn-group' fech_rege='group' aria-label='Basic mixed styles example'><button type='button' class='btn btn-danger btnBorrar'>Eliminar</button><button type='button' class='btn btn-warning btnEditar'>Editar</button>"}
@@ -29,12 +30,13 @@ $('#formAlumnos').submit(function(e){
     age = $.trim($('#age').val());  
     cedula = $.trim($('#cedula').val());    
     correo = $.trim($('#correo').val());    
-    fech_reg = $.trim($('#fech_reg').val());                    
+    fech_reg = $.trim($('#fech_reg').val());
+    clave = $.trim($('#clave').val());                    
         $.ajax({
           url: "crudalumnos.php",
           type: "POST",
           datatype:"json",    
-          data:  {user_id:user_id, nombre:nombre, cedula:cedula, correo:correo, fech_reg:fech_reg ,opcion:opcion, age:age},    
+          data:  {user_id:user_id, nombre:nombre, cedula:cedula, correo:correo, fech_reg:fech_reg ,opcion:opcion, age:age, clave:clave},    
           success: function(data) {
             tablaAlumnos.ajax.reload(null, false);
            }
@@ -61,14 +63,16 @@ $('#formAlumnos').submit(function(e){
         nombre = fila.find('td:eq(1)').text();
         age = fila.find('td:eq(2)').text();
         cedula = fila.find('td:eq(3)').text();
-        correo = fila.find('td:eq(4)').text();
-        fech_reg = fila.find('td:eq(5)').text();
+        correo = fila.find('td:eq(5)').text();
+        fech_reg = fila.find('td:eq(6)').text();
+        clave = fila.find('td:eq(4)').text();
         $("#nombre").val(nombre);
         $("#nombre").val(nombre);
         $("#cedula").val(cedula);
         $("#correo").val(correo);
         $("#fech_reg").val(fech_reg);
         $("#age").val(age);
+        $("#clave").val(clave);
         $(".modal-header").css("background-color", "#fff");
         $(".modal-header").css("color", "black" );
         $(".modal-title").text("Editar Usuario");		

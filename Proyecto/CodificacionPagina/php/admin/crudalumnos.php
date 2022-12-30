@@ -8,6 +8,7 @@ $edad = (isset($_POST['age'])) ? $_POST['age'] : '';
 $cedula = (isset($_POST['cedula'])) ? $_POST['cedula'] : '';
 $correo = (isset($_POST['correo'])) ? $_POST['correo'] : '';
 $fecha_reg = (isset($_POST['fech_reg'])) ? $_POST['fech_reg'] : '';
+$clave = (isset($_POST['clave'])) ? $_POST['clave'] : '';
 
 
 $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
@@ -15,7 +16,7 @@ $user_id = (isset($_POST['user_id'])) ? $_POST['user_id'] : '';
 
 switch($opcion){
     case 1:
-        $consulta = "INSERT INTO `alumnos`(`nombre_alumno`, `edad`, `cedula`, `correo`, `fecha_registro`) VALUES ('$nombre','$edad','$cedula','$correo','$fecha_reg')";			
+        $consulta = "INSERT INTO `alumnos`(`nombre_alumno`, `edad`, `cedula`, `correo`, `fecha_registro`,`clave`) VALUES ('$nombre','$edad','$cedula','$correo','$fecha_reg','$clave')";			
         $resultado = $conexion->prepare($consulta);
         $resultado->execute(); 
         
@@ -25,7 +26,7 @@ switch($opcion){
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);       
         break;    
     case 2:        
-        $consulta = "UPDATE `alumnos` SET `nombre_alumno`='$nombre',`edad`='$edad',`cedula`='$cedula',`correo`='$correo',`fecha_registro`='$fecha_reg' WHERE `alumno_id`='$user_id'";		
+        $consulta = "UPDATE `alumnos` SET `nombre_alumno`='$nombre',`edad`='$edad',`cedula`='$cedula',`correo`='$correo',`fecha_registro`='$fecha_reg', `clave`='$clave' WHERE `alumno_id`='$user_id'";		
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();        
         
