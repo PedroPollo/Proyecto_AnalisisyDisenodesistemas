@@ -4,6 +4,9 @@ if($_SESSION['rol'] != 1){
   header('location: ../../index.php');
 }
 
+$conexion = mysqli_connect("localhost","root","","proyecto");
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -58,7 +61,7 @@ if($_SESSION['rol'] != 1){
             <a class="nav-link" aria-current="page" href="aulasadmin.php">Administrar Aulas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="materiasadmin.php">Administrar Materias</a>
+            <a class="nav-link" aria-current="page" href="materiasadmin.php">Administrar Materias</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="periodosadmin.php">Administrar Periodo</a>
@@ -67,10 +70,10 @@ if($_SESSION['rol'] != 1){
             <a class="nav-link " aria-current="page" href="actividadadmin.php">Administrar Actividad</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="profmatadadmin.php">Administrar Profesores Materias</a>
+            <a class="nav-link" aria-current="page" href="profmatadadmin.php">Administrar Profesores Materias</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="alumprofadadmin.php">Administrar Alumnos Profesores</a>
+            <a class="nav-link active" aria-current="page" href="alumprofadadmin.php">Administrar Alumnos Profesores</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="../../logout.php">Cerrar Sesion</a>
@@ -102,13 +105,13 @@ if($_SESSION['rol'] != 1){
         </div>
         </header>
         <div class="container caja">
-        <table id="tablaMaterias" class="table text-center" style="width: 100%">
+        <table id="tablaalumprof" class="table text-center" style="width: 100%">
         <div class="col-12 pt-3 pb-3">
     <div class="card ">
         <div class="card-body ">
             <div class="d-sm-flex align-items-center">
                 <div class="mr-auto">
-                    <div class="page-context-header"><div class="page-header-headings"><h1>Administrar Materias</h1></div></div>
+                    <div class="page-context-header"><div class="page-header-headings"><h1>Administrar Alumno-Grupo</h1></div></div>
                 </div>
 
                 <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
@@ -128,7 +131,8 @@ if($_SESSION['rol'] != 1){
             <thead>
               <tr>
                 <th scope="col" class="text-center">ID</th>
-                <th scope="col" class="text-center">Materia</th>
+                <th scope="col" class="text-center">Alumno</th>
+                <th scope="col" class="text-center">Grupo</th>
                 <th scope="col" class="text-center">Accion</th>
               </tr>
             </thead>
@@ -136,7 +140,7 @@ if($_SESSION['rol'] != 1){
             </tbody>
           </table>
           <!-- Button trigger modal -->
-          <button id="btnNuevo" type="button" class="btn btn-primary" data-toggle="modal">Agregar Materia</button>
+          <button id="btnNuevo" type="button" class="btn btn-primary" data-toggle="modal">Agregar Alumno a Grupo</button>
         </div>
 
        <!--Modal para CRUD-->
@@ -146,18 +150,44 @@ if($_SESSION['rol'] != 1){
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"></h5>
             </div>
-        <form id="formMaterias">    
+        <form id="formalumprof">    
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="nombre" class="col-form-label">Materia:</label>
-                    <input type="text" class="form-control" id="materia">
+                        <?php
+                        $sql1 = "SELECT alumnos.alumno_id,alumnos.nombre_alumno FROM alumnos;";
+                        $resultado = mysqli_query($conexion,$sql1);
+                        ?>
+                    <label for="alumno" class="col-form-label">Alumno:</label>
+                    <select class="form-select" aria-label="Default select example" id="alumno">
+                        <option selected></option>
+                        <?php
+                        while($row = mysqli_fetch_array($resultado)){
+                            echo '  <option value="'.$row[0].'">'.$row[1].'</option>';
+                        }
+                        mysqli_free_result($resultado);
+                        ?>
+                    </select>
                     </div>
+                    </div>
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="grupo" class="col-form-label">Grupo:</label>
+                    <select class="form-select" aria-label="Default select example" id="grupo">
+                        <option selected></option>
+                        <?php
+                        $sql2 = "SELECT procesoprofesor.proceso_id,profesor.nombre,grados.nombre_grado,aulas.nombre_aula,materias.nombre_materia,periodos.nombre_periodo FROM procesoprofesor,profesor,grados,aulas,materias,periodos WHERE profesor.profesor_id = procesoprofesor.profesor_id AND grados.grado_id = procesoprofesor.grado_id AND aulas.aula_id = procesoprofesor.aula_id AND materias.materia_id = procesoprofesor.materia_id AND periodos.periodo_id = procesoprofesor.periodo_id;";
+                        $resultado = mysqli_query($conexion,$sql2);
+                        while($row = mysqli_fetch_array($resultado)){
+                            echo '  <option value="'.$row[0].'">Profesor:'.$row[1].', Grado:'.$row[2].', Aula:'.$row[3].', Materia:'.$row[4].', Periodo:'.$row[5].'</option>';
+                        }
+                        mysqli_free_result($resultado);
+                        ?>
+                    </select>
                     </div> 
-                </div>
-                
-                              
+                    </div>    
+                </div>                              
             </div>
             <div class="modal-footer">
               <input type="submit" id="btnGuardar" class="btn btn-success" value="Guardar">
@@ -174,7 +204,7 @@ if($_SESSION['rol'] != 1){
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../assets/datatables/datatables.min.js"></script>  
 
-<script type="text/javascript" src="materias.js"></script> 
+<script type="text/javascript" src="alumprof.js"></script> 
 
 </body>
 </html>

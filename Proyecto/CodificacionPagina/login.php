@@ -6,19 +6,19 @@ session_start();
 if(isset($_SESSION['rol'])){
     switch($_SESSION['rol']){
         case 1:
-            header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/indexadmin.php');
+            header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/index.php');
         break;
 
         case 2:
-        header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/maestros/indexmaestros.php');
+        header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/index.php');
         break;
 
         case 3:
-          header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/alumno/indexalumno.php');
+          header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/index.php');
           break;
 
         case 4:
-          header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/padres/indexpadres.php');
+          header('location: /Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/index.php');
           break;
 
         default:

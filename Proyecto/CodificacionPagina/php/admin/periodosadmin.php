@@ -70,6 +70,9 @@ if($_SESSION['rol'] != 1){
             <a class="nav-link " aria-current="page" href="profmatadadmin.php">Administrar Profesores Materias</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="alumprofadadmin.php">Administrar Alumnos Profesores</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" aria-current="page" href="../../logout.php">Cerrar Sesion</a>
           </li>
         </ul>
