@@ -1,11 +1,11 @@
-@@ -0,0 +1,183 @@
 <?php 
+$clase = $_GET['clase'];
 session_start();
 if($_SESSION['rol'] != 2){
   header('location: ../../index.php');
 }
 $user = $_SESSION['n'];
-$evaluacion = $_GET['evaluacion'];
+$entrega = $_GET['entrega'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -25,6 +25,7 @@ $prof = $row[0];
 mysqli_free_result($resultado);
 ?>
     <title><?php echo $prof; ?></title>
+
     <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <!-- CSS only -->
@@ -89,43 +90,21 @@ mysqli_free_result($resultado);
         </div>
         </header>
         <div class="container caja">
-        <table id="tablaEntregas" class="table text-center" style="width: 100%">
+        <table id="tablaNotas" class="table text-center" style="width: 100%">
         <div class="col-12 pt-3 pb-3">
     <div class="card ">
         <div class="card-body ">
             <div class="d-sm-flex align-items-center">
                 <div class="mr-auto">
-                    <div class="page-context-header"><div class="page-header-headings"><h1>Evaluaciones Entregadas</h1></div></div>
+                    <div class="page-context-header"><div class="page-header-headings"><h1>Administrar contenidos</h1></div></div>
                 </div>
 
                 <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
                 </div>
             </div>
-            <!-- Llenado de la carta -->
-            <?php
-            $sql = "SELECT * FROM evaluaciones WHERE evaluacion_id ='$evaluacion';";
-            $resultado = mysqli_query($conexion, $sql);
-            $row = mysqli_fetch_array($resultado);
-            mysqli_free_result($resultado);
-            ?>
-            <div class="card">
-  <div class="card-header">
-    Porcentaje: <?php echo $row[4]; ?>
-  </div>
-  <div class="card-body">
-    <h5 class="card-title"><?php echo $row[1]; ?></h5>
-    <p class="card-text"><?php echo $row[2] ?></p>
-    <p>Fecha de entrega: <button type="button" class="btn btn-secondary" disabled><?php echo $row[3] ?></button></p>
-  </div>
-</div>
-
-            <!-- Llenado de la carta -->
             <div class="d-flex flex-wrap">
                 <div class="ml-auto d-flex">
-                    <?php
-                    $sql1 = "SELECT alumnos.nombre_alumno, ev_entregadas.observacion, ev_entregadas.material, ev_entregadas.ev_entregadas_id FROM alumnos,ev_entregadas WHERE alumnos.alumno_id = ev_entregadas.alumno_id AND ev_entregadas.evaluacion_id = '$evaluacion';";
-                    $resultado1 = mysqli_query($conexion,$sql1);
-                    ?>
+                    
                 </div>
                 <div id="course-header">
                     
@@ -136,35 +115,124 @@ mysqli_free_result($resultado);
 </div>
             <thead>
               <tr>
-                <th scope="col" class="text-center">Alumno</th>
-                <th scope="col" class="text-center">Conclusiones</th>
-                <th scope="col" class="text-center">Material</th>
-                <th scope="col" class="text-center">Estatus</th>
-                <th scope="col" class="text-center">Cargar Nota</th>
+                <th scope="col" class="text-center">ID</th>
+                <th scope="col" class="text-center">Calificacion</th>
+                <th scope="col" class="text-center">Fecha que se califico</th>
+                <th scope="col" class="text-center">Accion</th>
               </tr>
             </thead>
             <tbody>
-                <?php
-                while($row1 = mysqli_fetch_array($resultado1)){
-                ?>
-                <tr>
-                        <td><?php echo $row1[0]; ?></td>
-                        <td><?php echo $row1[1]; ?></td>
-                        <td><?php echo $row1[2]; ?></td>
-                        <?php $sql1 = "SELECT * FROM notas WHERE ev_entregadas_id   = '$row1[3]';"; 
-                        $resultado2 = mysqli_query($conexion,$sql1);
-                        $num = mysqli_num_rows($resultado2);
-                        if($num == 0){
-                            echo '<td><button type="button" class="btn btn-danger" disabled>Sin calificar</button></td><td><a href="notas.php?entrega='.$row1[3].'" type="button" class="btn btn-warning">Agregar Nota</a></td>';
-                        }else{
-                            echo '<td><button type="button" class="btn btn-success" disabled>Calificado</button></td><td><a href="notas.php?entrega='.$row1[3].'" type="button" class="btn btn-warning">Editar Nota</a></td>';
-                            }
-                            mysqli_free_result($resultado2);
-                            ?>
-                </tr>
-                <?php } mysqli_free_result($resultado1);?>
             </tbody>
           </table>
+          <!-- Button trigger modal -->
+          <button id="btnNuevo" type="button" class="btn btn-primary" data-toggle="modal">Agregar Nota</button>
+        </div>
+        <!--Modal para CRUD-->
+<div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+            </div>
+        <form id="formNotas">    
+            <input type="hidden" id="clase" value="<?php echo $_GET['clase'] ;?>">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="nota" class="col-form-label">Calificacion:</label>
+                    <input type="text" class="form-control" id="nota">
+                    </div>
+                    </div> 
+                    <fieldset disabled>
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                        <?php
+                        date_default_timezone_set('America/Mexico_City');
+                        $fecha = date("Y-m-d H:i:s");
+                        ?>
+                    <label for="fecha" class="col-form-label">Calificacion:</label>
+                    <input type="datetime" class="form-control" id="fecha" value="<?php echo $fecha; ?>">
+                    </div>
+                    </div> 
+                    </fieldset>
+                </div>                              
+            </div>
+            <div class="modal-footer">
+              <input type="submit" id="btnGuardar" class="btn btn-success" value="Guardar">
+          </div>
+        </form>    
+        </div>
+    </div>
+</div>  
 
+<!-- jQuery ,Popper.js, datatables JS -->
+<script src="../assets/jquery/jquery-3.3.1.min.js"></script>
+<script src="../assets/popper/popper.min.js"></script>
+<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../assets/datatables/datatables.min.js"></script> 
+
+<script type="text/javascript">
+    var user_id, opcion;
+    opcion = 4;  
+    entrega=<?php echo $entrega; ?>;
+
+    tablaNotas = $('#tablaNotas').DataTable({  
+        "ajax":{            
+            "url": "crudnotas.php", 
+            "method": 'POST', //usamos el metodo POST
+            "data":{opcion:opcion,entrega:entrega}, //enviamos opcion 4 para que haga un SELECT
+            "dataSrc":""
+        },
+        "columns":[
+            {"data": "nota_id"},
+            {"data": "valor_nota"},
+            {"data": "fecha"},
+            {"defaultContent": "<div class='btn-group' fech_rege='group' aria-label='Basic mixed styles example'><button type='button' class='btn btn-warning btnEditar'>Editar</button></div>"}
+        ]
+    });
+
+//submit para el Alta y Actualización
+$('#formNotas').submit(function(e){                         
+    e.preventDefault(); //evita el comportambiento normal del submit, es decir, recarga total de la página
+    nota = $.trim($('#nota').val());   
+    fecha = $.trim($('#fecha').val());
+        $.ajax({
+          url: "crudnotas.php",
+          type: "POST",
+          datatype:"json",    
+          data:  {nota:nota, opcion:opcion, fecha:fecha, entrega:entrega},    
+          success: function(data) {
+            tablaNotas.ajax.reload(null, false);
+           }
+        });			        
+    $('#modalCRUD').modal('hide');											     			
+});
+
+    $(document).ready(function(){
+        $("#btnNuevo").click(function(){
+        opcion = 1; //alta           
+        $("#formNotas").trigger("reset");
+        $(".modal-header").css( "background-color", "#fff");
+        $(".modal-header").css( "color", "black" );
+        $(".modal-title").text("Agregar Evaluacion");
+        $('#modalCRUD').modal('show');		    
+    });
+
+    //Editar        
+    $(document).on("click", ".btnEditar", function(){		        
+        opcion = 2;//editar
+        fila = $(this).closest("tr");        
+        nota = fila.find('td:eq(1)').text();
+        fecha = fila.find('td:eq(2)').text();
+        $("#nota").val(nota);
+        $("#fecha").val(fecha);
+        $(".modal-header").css("background-color", "#fff");
+        $(".modal-header").css("color", "black" );
+        $(".modal-title").text("Editar Evaluacion");		
+        $('#modalCRUD').modal('show');		   
+    });
+    });
+</script>
 </body>
 </html>
