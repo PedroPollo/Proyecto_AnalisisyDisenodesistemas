@@ -67,9 +67,6 @@ $conexion = mysqli_connect("localhost","root","","proyecto");
             <a class="nav-link" aria-current="page" href="periodosadmin.php">Administrar Periodo</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="actividadadmin.php">Administrar Actividad</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="profmatadadmin.php">Administrar Profesores Materias</a>
           </li>
           <li class="nav-item">
