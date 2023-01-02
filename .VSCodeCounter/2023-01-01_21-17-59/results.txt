@@ -1,0 +1,92 @@
+Date : 2023-01-01 21:17:59
+Directory : /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas
+Total : 60 files,  5805 codes, 277 comments, 601 blanks, all 6683 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| PHP        |         44 |      4,528 |          5 |        389 |      4,922 |
+| JavaScript |         15 |      1,045 |         52 |         99 |      1,196 |
+| SQL        |          1 |        232 |        220 |        113 |        565 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                   | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                      |         60 |      5,805 |        277 |        601 |      6,683 |
+| Proyecto                                                                                                                               |         59 |      5,573 |         57 |        488 |      6,118 |
+| Proyecto/CodificacionPagina                                                                                                            |         59 |      5,573 |         57 |        488 |      6,118 |
+| Proyecto/CodificacionPagina/php                                                                                                        |         52 |      5,157 |         54 |        410 |      5,621 |
+| Proyecto/CodificacionPagina/php/admin                                                                                                  |         28 |      2,899 |         37 |        256 |      3,192 |
+| Proyecto/CodificacionPagina/php/alumno                                                                                                 |         11 |        862 |          3 |         67 |        932 |
+| Proyecto/CodificacionPagina/php/maestros                                                                                               |         13 |      1,396 |         14 |         87 |      1,497 |
++----------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                                               | language   | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/conexion.php                      | PHP        |         16 |          0 |          0 |         16 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/conexion_bd.php                   | PHP        |         29 |          0 |          8 |         37 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/index.php                         | PHP        |         82 |          0 |          4 |         86 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/login.php                         | PHP        |         93 |          1 |         22 |        116 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/loginalum.php                     | PHP        |         95 |          1 |         22 |        118 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/loginprof.php                     | PHP        |         95 |          1 |         22 |        118 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/logout.php                        | PHP        |          6 |          0 |          0 |          6 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/alumnos.js              | JavaScript |         90 |          4 |          7 |        101 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/alumnosadmin.php        | PHP        |        204 |          0 |         14 |        218 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/alumprof.js             | JavaScript |         73 |          4 |          7 |         84 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/alumprofadadmin.php     | PHP        |        192 |          0 |         15 |        207 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/aulas.js                | JavaScript |         69 |          4 |          7 |         80 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/aulasadmin.php          | PHP        |        162 |          0 |         15 |        177 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/crudalumnos.php         | PHP        |         46 |          0 |          7 |         53 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/crudalumprof.php        | PHP        |         36 |          0 |          7 |         43 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/crudaulas.php           | PHP        |         41 |          0 |          6 |         47 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/crudgrados.php          | PHP        |         41 |          0 |          6 |         47 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/crudmaterias.php        | PHP        |         41 |          0 |          6 |         47 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/crudperiodos.php        | PHP        |         41 |          0 |          6 |         47 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/crudprofesores.php      | PHP        |         47 |          0 |          6 |         53 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/crudprofmat.php         | PHP        |         45 |          0 |          7 |         52 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/crudusuarios.php        | PHP        |         46 |          0 |          7 |         53 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/grados.js               | JavaScript |         69 |          4 |          7 |         80 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/gradosadmin.php         | PHP        |        162 |          0 |         15 |        177 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/indexadmin.php          | PHP        |        102 |          0 |          3 |        105 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/materias.js             | JavaScript |         69 |          4 |          7 |         80 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/materiasadmin.php       | PHP        |        162 |          0 |         15 |        177 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/periodos.js             | JavaScript |         69 |          4 |          7 |         80 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/periodosadmin.php       | PHP        |        162 |          0 |         15 |        177 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/profesores.js           | JavaScript |         93 |          4 |          7 |        104 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/profesoresadmin.php     | PHP        |        210 |          0 |         13 |        223 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/profmat.js              | JavaScript |         84 |          5 |          7 |         96 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/profmatadadmin.php      | PHP        |        249 |          0 |         17 |        266 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/usuarios.js             | JavaScript |         89 |          4 |          7 |        100 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/admin/usuariosadmin.php       | PHP        |        205 |          0 |         13 |        218 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/alumno/clases.php             | PHP        |        108 |          0 |          3 |        111 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/alumno/contenidos.js          | JavaScript |         23 |          0 |          3 |         26 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/alumno/contenidos.php         | PHP        |        131 |          0 |          8 |        139 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/alumno/crudcontenidos.php     | PHP        |         14 |          0 |          6 |         20 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/alumno/crudentregas.php       | PHP        |         39 |          0 |          7 |         46 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/alumno/crudevaluaciones.php   | PHP        |         13 |          0 |          5 |         18 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/alumno/entregas.js            | JavaScript |         54 |          3 |          6 |         63 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/alumno/entregas.php           | PHP        |        191 |          0 |         12 |        203 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/alumno/evaluaciones.js        | JavaScript |         24 |          0 |          4 |         28 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/alumno/evaluaciones.php       | PHP        |        178 |          0 |         11 |        189 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/alumno/indexalumno.php        | PHP        |         87 |          0 |          2 |         89 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/maestros/alumnos.php          | PHP        |        106 |          0 |          3 |        109 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/maestros/clases.php           | PHP        |        108 |          0 |          3 |        111 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/maestros/contenidos.js        | JavaScript |         83 |          4 |          8 |         95 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/maestros/contenidos.php       | PHP        |        174 |          0 |         10 |        184 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/maestros/crudcontenidos.php   | PHP        |         38 |          0 |          6 |         44 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/maestros/crudevaluaciones.php | PHP        |         39 |          0 |          6 |         45 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/maestros/crudnotas.php        | PHP        |         36 |          0 |          6 |         42 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/maestros/entregas.php         | PHP        |        164 |          0 |          6 |        170 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/maestros/evaluaciones.js      | JavaScript |         86 |          4 |          8 |         98 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/maestros/evaluaciones.php     | PHP        |        181 |          0 |         10 |        191 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/maestros/indexmaestros.php    | PHP        |         87 |          0 |          2 |         89 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/maestros/notas.js             | JavaScript |         70 |          4 |          7 |         81 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/php/maestros/notas.php            | PHP        |        224 |          2 |         12 |        238 |
+| /Applications/XAMPP/xamppfiles/htdocs/Proyecto_AnalisisyDisenodesistemas/proyecto.sql                                                  | SQL        |        232 |        220 |        113 |        565 |
+| Total                                                                                                                                  |            |      5,805 |        277 |        601 |      6,683 |
++----------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
