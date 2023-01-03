@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 31-12-2022 a las 05:24:43
+-- Tiempo de generación: 03-01-2023 a las 20:02:27
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.1.12
 
@@ -20,24 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `proyecto`
 --
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `actividad`
---
-
-CREATE TABLE `actividad` (
-  `actividad_id` int(11) NOT NULL,
-  `nombre_actividad` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `actividad`
---
-
-INSERT INTO `actividad` (`actividad_id`, `nombre_actividad`) VALUES
-(5, 'Ejercicio 2');
 
 -- --------------------------------------------------------
 
@@ -62,7 +44,7 @@ CREATE TABLE `alumnos` (
 INSERT INTO `alumnos` (`alumno_id`, `nombre_alumno`, `edad`, `cedula`, `correo`, `fecha_registro`, `clave`) VALUES
 (5, 'Sergio', 16, '1', 'sergio@gmail.com', '2022-08-17', '123'),
 (6, 'Joaquin', 16, '2', 'pedroaguila4322@gmail.com', '2020-08-03', '123'),
-(9, 'Luis', 19, '123123', 'awdaodaoiwdjaowi@opaekfae.com', '2022-12-09', '');
+(9, 'Luis', 19, '123123', 'awdaodaoiwdjaowi@opaekfae.com', '2022-12-09', '123');
 
 -- --------------------------------------------------------
 
@@ -103,7 +85,8 @@ CREATE TABLE `contenidos` (
 INSERT INTO `contenidos` (`contenido_id`, `titulo`, `descripcion`, `material`, `procesoprofesor_id`) VALUES
 (1, 'Pimer Parcial', 'Aqui se asignaran las evaluaciones del primer parcial', '', 10),
 (16, 'Primer Parcial', 'No Hay falla', '', 12),
-(17, 'Segundo Parcial', 'No Hay falla', '', 12);
+(17, 'Segundo Parcial', 'No Hay falla', '', 12),
+(18, 'Primer Parcial', 'Hola', 'Matematicas', 6);
 
 -- --------------------------------------------------------
 
@@ -127,7 +110,10 @@ CREATE TABLE `evaluaciones` (
 INSERT INTO `evaluaciones` (`evaluacion_id`, `titulo`, `descripcion`, `fecha`, `porcentaje`, `contenido_id`) VALUES
 (1, 'Esto', 'Es de ejemplo', '2022-12-22', '30%', 1),
 (3, 'Esta es de', 'Matematicas', '2022-12-24', '50%', 16),
-(4, 'Es de', 'matematicas para borrar', '2022-12-16', '30%', 17);
+(4, 'Es de', 'matematicas para borrar', '2022-12-16', '30%', 17),
+(6, 'Esto', 'Es de prueba', '2023-01-11', '30%', 18),
+(7, 'Este es otro ejemplo', 'No Hay falla', '2023-01-11', '50%', 1),
+(8, 'Otra prueba mas', 'No Hay falla', '2023-01-19', '20', 1);
 
 -- --------------------------------------------------------
 
@@ -149,7 +135,9 @@ CREATE TABLE `ev_entregadas` (
 
 INSERT INTO `ev_entregadas` (`ev_entregadas_id`, `evaluacion_id`, `alumno_id`, `material`, `observacion`) VALUES
 (1, 1, 5, 'Esto es mi entrega', 'Aquib van mis conclusiones'),
-(3, 1, 9, 'aefsfs', 'adwddess');
+(3, 1, 9, 'aefsfs', 'adwddess'),
+(4, 7, 5, 'pokdpoawD', 'hhhhhh'),
+(6, 6, 5, '', 'Esta es una entrega');
 
 -- --------------------------------------------------------
 
@@ -208,7 +196,29 @@ CREATE TABLE `notas` (
 --
 
 INSERT INTO `notas` (`nota_id`, `ev_entregadas_id`, `valor_nota`, `fecha`) VALUES
-(15, 1, 100, '2022-12-30 21:13:14');
+(15, 1, 100, '2022-12-30 21:13:14'),
+(18, 3, 90, '2023-01-01 13:10:34'),
+(20, 4, 100, '2023-01-01 20:43:37');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `padres`
+--
+
+CREATE TABLE `padres` (
+  `padres_id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `clave` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `padres`
+--
+
+INSERT INTO `padres` (`padres_id`, `nombre`, `username`, `clave`) VALUES
+(2, 'Soy el papa de prueba', 'papa', '123');
 
 -- --------------------------------------------------------
 
@@ -254,6 +264,25 @@ INSERT INTO `procesoalumno` (`procesoa_id`, `alumno_id`, `proceso_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `procesopadre`
+--
+
+CREATE TABLE `procesopadre` (
+  `procesop_id` int(11) NOT NULL,
+  `alumno_id` int(11) NOT NULL,
+  `padres_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `procesopadre`
+--
+
+INSERT INTO `procesopadre` (`procesop_id`, `alumno_id`, `padres_id`) VALUES
+(1, 5, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `procesoprofesor`
 --
 
@@ -273,7 +302,8 @@ CREATE TABLE `procesoprofesor` (
 INSERT INTO `procesoprofesor` (`proceso_id`, `grado_id`, `aula_id`, `profesor_id`, `materia_id`, `periodo_id`) VALUES
 (6, 9, 6, 13, 6, 5),
 (10, 9, 6, 5, 8, 5),
-(12, 10, 6, 5, 6, 5);
+(12, 10, 6, 5, 6, 5),
+(13, 10, 6, 13, 8, 5);
 
 -- --------------------------------------------------------
 
@@ -312,27 +342,20 @@ CREATE TABLE `usuarios` (
   `password` varchar(45) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `ap_paterno` varchar(45) NOT NULL,
-  `ap_materno` varchar(45) NOT NULL,
-  `rol` int(11) NOT NULL
+  `ap_materno` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `username`, `password`, `nombre`, `ap_paterno`, `ap_materno`, `rol`) VALUES
-(1, 'admin', 'admin', 'Pedro Alejandro', 'Nuñez', 'Perez', 1),
-(9, 'otrousuariomas', '123', 'Luis', 'Padriquez', 'eadf', 2);
+INSERT INTO `usuarios` (`id`, `username`, `password`, `nombre`, `ap_paterno`, `ap_materno`) VALUES
+(1, 'admin', 'admin', 'Pedro Alejandro', 'Nuñez', 'Perez'),
+(9, 'otrousuariomas', '123', 'Luis', 'Padriquez', 'eadf');
 
 --
 -- Índices para tablas volcadas
 --
-
---
--- Indices de la tabla `actividad`
---
-ALTER TABLE `actividad`
-  ADD PRIMARY KEY (`actividad_id`);
 
 --
 -- Indices de la tabla `alumnos`
@@ -385,7 +408,14 @@ ALTER TABLE `materias`
 --
 ALTER TABLE `notas`
   ADD PRIMARY KEY (`nota_id`),
+  ADD UNIQUE KEY `ev_entregadas_id_2` (`ev_entregadas_id`),
   ADD KEY `ev_entregadas_id` (`ev_entregadas_id`);
+
+--
+-- Indices de la tabla `padres`
+--
+ALTER TABLE `padres`
+  ADD PRIMARY KEY (`padres_id`);
 
 --
 -- Indices de la tabla `periodos`
@@ -400,6 +430,15 @@ ALTER TABLE `procesoalumno`
   ADD PRIMARY KEY (`procesoa_id`),
   ADD KEY `alumno_id` (`alumno_id`),
   ADD KEY `proceso_id` (`proceso_id`);
+
+--
+-- Indices de la tabla `procesopadre`
+--
+ALTER TABLE `procesopadre`
+  ADD PRIMARY KEY (`procesop_id`),
+  ADD KEY `padres_id` (`padres_id`),
+  ADD KEY `alumno_id` (`alumno_id`),
+  ADD KEY `padres_id_2` (`padres_id`);
 
 --
 -- Indices de la tabla `procesoprofesor`
@@ -429,12 +468,6 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `actividad`
---
-ALTER TABLE `actividad`
-  MODIFY `actividad_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
@@ -450,19 +483,19 @@ ALTER TABLE `aulas`
 -- AUTO_INCREMENT de la tabla `contenidos`
 --
 ALTER TABLE `contenidos`
-  MODIFY `contenido_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `contenido_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `evaluaciones`
 --
 ALTER TABLE `evaluaciones`
-  MODIFY `evaluacion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `evaluacion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `ev_entregadas`
 --
 ALTER TABLE `ev_entregadas`
-  MODIFY `ev_entregadas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ev_entregadas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `grados`
@@ -480,7 +513,13 @@ ALTER TABLE `materias`
 -- AUTO_INCREMENT de la tabla `notas`
 --
 ALTER TABLE `notas`
-  MODIFY `nota_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `nota_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT de la tabla `padres`
+--
+ALTER TABLE `padres`
+  MODIFY `padres_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `periodos`
@@ -492,13 +531,19 @@ ALTER TABLE `periodos`
 -- AUTO_INCREMENT de la tabla `procesoalumno`
 --
 ALTER TABLE `procesoalumno`
-  MODIFY `procesoa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `procesoa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `procesopadre`
+--
+ALTER TABLE `procesopadre`
+  MODIFY `procesop_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `procesoprofesor`
 --
 ALTER TABLE `procesoprofesor`
-  MODIFY `proceso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `proceso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `profesor`
@@ -547,6 +592,13 @@ ALTER TABLE `notas`
 ALTER TABLE `procesoalumno`
   ADD CONSTRAINT `procesoalumno_ibfk_1` FOREIGN KEY (`alumno_id`) REFERENCES `alumnos` (`alumno_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `procesoalumno_ibfk_2` FOREIGN KEY (`proceso_id`) REFERENCES `procesoprofesor` (`proceso_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `procesopadre`
+--
+ALTER TABLE `procesopadre`
+  ADD CONSTRAINT `procesopadre_ibfk_1` FOREIGN KEY (`alumno_id`) REFERENCES `alumnos` (`alumno_id`),
+  ADD CONSTRAINT `procesopadre_ibfk_2` FOREIGN KEY (`padres_id`) REFERENCES `padres` (`padres_id`);
 
 --
 -- Filtros para la tabla `procesoprofesor`
