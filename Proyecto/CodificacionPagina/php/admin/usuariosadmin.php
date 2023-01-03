@@ -130,7 +130,6 @@ if($_SESSION['rol'] != 1){
                 <th scope="col" class="text-center">Nombre</th>
                 <th scope="col" class="text-center">Apellido Paterno</th>
                 <th scope="col" class="text-center">Apellido Materno</th>
-                <th scope="col" class="text-center">Rol</th>
                 <th scope="col" class="text-center">Accion</th>
               </tr>
             </thead>
@@ -177,25 +176,7 @@ if($_SESSION['rol'] != 1){
                     <input type="text" class="form-control" id="ap_materno">
                     </div>
                     </div>  
-                </div>
-                <div class="row">
-                    <div class="col-lg-9">
-                        <div class="form-group">
-                          <label for="rol">Rol</label>
-                        <select id="rol" class="form-select" aria-label="Default select example">
-                        <option selected>Seleccione el rol</option>
-                        <option value="1">Administrador</option>
-                        <option value="2">Maestro</option>
-                        <option value="3">Alumno</option>
-                        <option value="4">Padre</option>
-                        </select>
-                        </div>
-                        <div class="form-group">
-                        <label for="" class="col-form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password">
-                        </div>
-                    </div>    
-                </div>                
+                </div>       
             </div>
             <div class="modal-footer">
               <input type="submit" id="btnGuardar" class="btn btn-success" value="Guardar">

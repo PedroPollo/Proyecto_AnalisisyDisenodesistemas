@@ -7,7 +7,6 @@ $username = (isset($_POST['username'])) ? $_POST['username'] : '';
 $nombre = (isset($_POST['nombre'])) ? $_POST['nombre'] : '';
 $ap_paterno = (isset($_POST['ap_paterno'])) ? $_POST['ap_paterno'] : '';
 $ap_materno = (isset($_POST['ap_materno'])) ? $_POST['ap_materno'] : '';
-$rol = (isset($_POST['rol'])) ? $_POST['rol'] : '';
 $password = (isset($_POST['password'])) ? $_POST['password'] : '';
 
 
@@ -16,7 +15,7 @@ $user_id = (isset($_POST['user_id'])) ? $_POST['user_id'] : '';
 
 switch($opcion){
     case 1:
-        $consulta = "INSERT INTO `usuarios`(`username`, `password`, `nombre`, `ap_paterno`, `ap_materno`, `rol`) VALUES('$username','$password', '$nombre', '$ap_paterno', '$ap_materno', '$rol') ";			
+        $consulta = "INSERT INTO `usuarios`(`username`, `password`, `nombre`, `ap_paterno`, `ap_materno`) VALUES('$username','$password', '$nombre', '$ap_paterno', '$ap_materno') ";			
         $resultado = $conexion->prepare($consulta);
         $resultado->execute(); 
         
@@ -26,7 +25,7 @@ switch($opcion){
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);       
         break;    
     case 2:        
-        $consulta = "UPDATE `usuarios` SET `username`='$username',`password`='$password',`nombre`='$nombre',`ap_paterno`='$ap_paterno',`ap_materno`='$ap_materno',`rol`='$rol' WHERE id='$user_id' ";		
+        $consulta = "UPDATE `usuarios` SET `username`='$username',`password`='$password',`nombre`='$nombre',`ap_paterno`='$ap_paterno',`ap_materno`='$ap_materno' WHERE id='$user_id' ";		
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();        
         

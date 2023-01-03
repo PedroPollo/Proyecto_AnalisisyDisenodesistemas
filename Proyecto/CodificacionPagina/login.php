@@ -36,7 +36,7 @@ if(isset($_POST['usuario']) && isset($_POST['pass'])){
     $row = $query->fetch(PDO::FETCH_NUM);
     
     if($row == true){
-        $rol = $row[6];        
+        $rol = 1;        
         $_SESSION['rol'] = $rol;
         switch($rol){
           case 1:

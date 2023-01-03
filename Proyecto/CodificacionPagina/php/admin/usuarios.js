@@ -17,7 +17,6 @@ $(document).ready(function() {
             {"data": "nombre"},
             {"data": "ap_paterno"},
             {"data": "ap_materno"},
-            {"data": "rol"},
             {"defaultContent": "<div class='btn-group' role='group' aria-label='Basic mixed styles example'><button type='button' class='btn btn-danger btnBorrar'>Eliminar</button><button type='button' class='btn btn-warning btnEditar'>Editar</button>"}
         ]
     });     
@@ -31,12 +30,11 @@ $('#formUsuarios').submit(function(e){
     nombre = $.trim($('#nombre').val());
     ap_paterno = $.trim($('#ap_paterno').val());    
     ap_materno = $.trim($('#ap_materno').val());    
-    rol = $.trim($('#rol').val());                    
         $.ajax({
           url: "crudusuarios.php",
           type: "POST",
           datatype:"json",    
-          data:  {user_id:user_id, username:username, nombre:nombre, ap_paterno:ap_paterno, ap_materno:ap_materno, rol:rol ,opcion:opcion, password:password},    
+          data:  {user_id:user_id, username:username, nombre:nombre, ap_paterno:ap_paterno, ap_materno:ap_materno,opcion:opcion, password:password},    
           success: function(data) {
             tablaUsuarios.ajax.reload(null, false);
            }
@@ -65,12 +63,10 @@ $('#formUsuarios').submit(function(e){
         nombre = fila.find('td:eq(3)').text();
         ap_paterno = fila.find('td:eq(4)').text();
         ap_materno = fila.find('td:eq(5)').text();
-        rol = fila.find('td:eq(6)').text();
         $("#username").val(username);
         $("#nombre").val(nombre);
         $("#ap_paterno").val(ap_paterno);
         $("#ap_materno").val(ap_materno);
-        $("#rol").val(rol);
         $("#password").val(password);
         $(".modal-header").css("background-color", "#fff");
         $(".modal-header").css("color", "black" );
