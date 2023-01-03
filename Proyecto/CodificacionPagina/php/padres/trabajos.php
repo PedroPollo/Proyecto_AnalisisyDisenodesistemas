@@ -24,8 +24,9 @@ $prof = $row[0];
 mysqli_free_result($resultado);
 $alumno = $_GET["alumno"];
 $clase = $_GET["clase"];
-$sql1 = "SELECT * FROM `contenidos` WHERE `procesoprofesor_id`='$clase';";
-$resultado = mysqli_query($conexion,$sql1);
+$contenido = $_GET["contenido"];
+$sql = "SELECT * FROM `evaluaciones` WHERE `contenido_id`='$contenido';";
+$resultado = mysqli_query($conexion,$sql);
 ?>
     <title><?php echo $prof; ?></title>
 
@@ -99,7 +100,7 @@ $resultado = mysqli_query($conexion,$sql1);
         <div class="card-body ">
             <div class="d-sm-flex align-items-center">
                 <div class="mr-auto">
-                    <div class="page-context-header"><div class="page-header-headings"><h1>contenidos</h1></div></div>
+                    <div class="page-context-header"><div class="page-header-headings"><h1>Evaluaicones</h1></div></div>
                 </div>
 
                 <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
@@ -120,23 +121,46 @@ $resultado = mysqli_query($conexion,$sql1);
               <tr>
                 <th scope="col" class="text-center">Titulo</th>
                 <th scope="col" class="text-center">Descripcion</th>
-                <th scope="col" class="text-center">Material</th>
-                <th scope="col" class="text-center">Accion</th>
+                <th scope="col" class="text-center">Fecha de Entrega</th>
+                <th scope="col" class="text-center">Porcentaje</th>
+                <th scope="col" class="text-center">Estatus</th>
+                <th scope="col" class="text-center">Nota</th>
               </tr>
             </thead>
             <tbody>
                 <?php
-                while($row = mysqli_fetch_array($resultado)){
+                while($row=mysqli_fetch_array($resultado)){
                 ?>
                 <tr>
-                    <td><?php echo $row[1] ?></td>
-                    <td><?php echo $row[2] ?></td>
-                    <td><?php echo $row[3] ?></td>
-                    <td><a href="trabajos.php?alumno=<?php echo $alumno; ?>&clase=<?php echo $clase; ?>&contenido=<?php echo $row[0]; ?>" type="button" class="btn btn-dark">Ver trabajos</a></td>
+                    <td><?php echo $row[1]; ?></td>
+                    <td><?php echo $row[2]; ?></td>
+                    <td><?php echo $row[3]; ?></td>
+                    <td><?php echo $row[4]; ?></td>
+                    <td><?php
+                    $sql = "SELECT * FROM `ev_entregadas` WHERE `evaluacion_id`='$row[0]' AND `alumno_id`='$alumno';";
+                    $resultado2 = mysqli_query($conexion,$sql);
+                    $num = mysqli_num_rows($resultado2);
+                    $row1 = mysqli_fetch_array($resultado2);
+                    if($num != 0){
+                        echo '<button type="button" class="btn btn-primary" disabled>Entregado</button>';
+                    }else{
+                        echo '<button type="button" class="btn btn-danger" disabled>Sin entregar</button>';
+                    }
+                    ?></td>
+                    <td><?php
+                    $sql = "SELECT * FROM `notas` WHERE `ev_entregadas_id`='$row1[0]';";
+                    $resultado3 = mysqli_query($conexion,$sql);
+                    $num1 = mysqli_num_rows($resultado3);
+                    $row2 = mysqli_fetch_array($resultado3);
+                    if($num1 == 0){
+                        echo "";
+                    }else{
+                        echo $row2[2];
+                    }
+                    ?></td>
                 </tr>
                 <?php
                 }
-                mysqli_free_result($resultado);
                 ?>
             </tbody>
           </table>

@@ -114,7 +114,7 @@ $conexion = mysqli_connect("localhost","root","","proyecto");
         <div class="card-body ">
             <div class="d-sm-flex align-items-center">
                 <div class="mr-auto">
-                    <div class="page-context-header"><div class="page-header-headings"><h1>Administrar Alumno-Grupo</h1></div></div>
+                    <div class="page-context-header"><div class="page-header-headings"><h1>Administrar Padre-Alumno</h1></div></div>
                 </div>
 
                 <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
