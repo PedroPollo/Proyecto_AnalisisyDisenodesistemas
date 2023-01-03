@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if($_SESSION['rol'] != 2){
+if($_SESSION['rol'] != 4){
   header('location: ../../index.php');
 }
 $user = $_SESSION['n'];
@@ -16,13 +16,13 @@ $user = $_SESSION['n'];
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
     <?php
 $conexion = mysqli_connect("localhost","root","","proyecto");
-$sql = "SELECT profesor.nombre FROM `profesor` WHERE profesor_id = '$user'";
+$sql = "SELECT padres.nombre FROM `padres` WHERE padres_id = '$user'";
 $resultado = mysqli_query($conexion,$sql);
 $row = mysqli_fetch_array($resultado);
-$prof = $row[0];
+$alumno = $row[1];
 mysqli_free_result($resultado);
 ?>
-    <title><?php echo $prof; ?></title>
+    <title><?php echo $alumnmo; ?></title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -40,16 +40,16 @@ mysqli_free_result($resultado);
     </button>
     <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Profesor</h5>
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Padre</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="indexmaestros.php">Pagina principal</a>
+            <a class="nav-link active" aria-current="page" href="indexalumno.php">Pagina principal</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="clases.php">Clases</a>
+            <a class="nav-link" aria-current="page" href="hijos.php">Hijos</a>
           </li>          
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="../../logout.php">Cerrar Sesion</a>
@@ -79,30 +79,11 @@ mysqli_free_result($resultado);
             </div>
         </div>
         </div>
-        </header>
-        <?php
-        $sql="SELECT alumnos.nombre_alumno, alumnos.cedula FROM alumnos,procesoalumno WHERE alumnos.alumno_id=procesoalumno.alumno_id AND procesoalumno.proceso_id='$clase';";
-        $resultado = mysqli_query($conexion,$sql);
-        ?>
-<div class="p-3 m-0 border-0 bd-example">
-     <div class="row">
-      <?php 
-      while ($row = mysqli_fetch_array($resultado)){
-      ?>
-        <div class="col-lg-3">
-          <div class="card" style="width: 18rem;">
-          <img src="/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/rsc/user.png" class="card-img-top">
-          <div class="card-body">
-              <h5 class="card-title"><?php echo $row[0] ?></h5>
-              <p>Cedula:<a class="btn btn-primary disabled" tabindex="-1" role="button" aria-disabled="true"><?php echo $row[1] ?></a><br>
-              <div class="btn-group" role="group" aria-label="Basic example">
-              </div>
-          </div>
-          </div>
-        </div>
-      <?php } ?>
-     </div>
+<div class="col">
+    <div id="page" class="container-fluid d-print-block">
+        <div class="card"><img src="/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/rsc/Banner Mundo E.png" style="max-width:100%;max-height:100%;width:auto;height:auto;"></div>
+    </div>
 </div>
-
+        </header>
 </body>
 </html>

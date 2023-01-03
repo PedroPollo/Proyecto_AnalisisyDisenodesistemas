@@ -52,13 +52,13 @@ if($_SESSION['rol'] != 1){
             <a class="nav-link" aria-current="page" href="alumnosadmin.php">Administrar Alumnos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="padresadmin.php">Administrar Padres</a>
+            <a class="nav-link active" aria-current="page" href="padresadmin.php">Administrar Padres</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="gradosadmin.php">Administrar Grados</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="aulasadmin.php">Administrar Aulas</a>
+            <a class="nav-link" aria-current="page" href="aulasadmin.php">Administrar Aulas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="materiasadmin.php">Administrar Materias</a>
@@ -105,13 +105,13 @@ if($_SESSION['rol'] != 1){
         </div>
         </header>
         <div class="container caja">
-        <table id="tablaAulas" class="table text-center" style="width: 100%">
+        <table id="tablaAlumnos" class="table" style="width: 100%">
         <div class="col-12 pt-3 pb-3">
     <div class="card ">
         <div class="card-body ">
             <div class="d-sm-flex align-items-center">
                 <div class="mr-auto">
-                    <div class="page-context-header"><div class="page-header-headings"><h1>Administrar Aulas</h1></div></div>
+                    <div class="page-context-header"><div class="page-header-headings"><h1>Administrar Alumnos</h1></div></div>
                 </div>
 
                 <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
@@ -131,7 +131,9 @@ if($_SESSION['rol'] != 1){
             <thead>
               <tr>
                 <th scope="col" class="text-center">ID</th>
-                <th scope="col" class="text-center">Aula</th>
+                <th scope="col" class="text-center">Nombre</th>
+                <th scope="col" class="text-center">Username</th>
+                <th scope="col" class="text-center">Clave</th>
                 <th scope="col" class="text-center">Accion</th>
               </tr>
             </thead>
@@ -139,7 +141,7 @@ if($_SESSION['rol'] != 1){
             </tbody>
           </table>
           <!-- Button trigger modal -->
-          <button id="btnNuevo" type="button" class="btn btn-primary" data-toggle="modal">Agregar Aula</button>
+          <button id="btnNuevo" type="button" class="btn btn-primary" data-toggle="modal">Agregar usuario</button>
         </div>
 
        <!--Modal para CRUD-->
@@ -149,17 +151,34 @@ if($_SESSION['rol'] != 1){
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"></h5>
             </div>
-        <form id="formAulas">    
+        <form id="formAlumnos">    
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-6">
                     <div class="form-group">
-                    <label for="nombre" class="col-form-label">Aula:</label>
-                    <input type="text" class="form-control" id="aula">
+                    <label for="nombre" class="col-form-label">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre">
+                    </div>
+                    </div>  
+                </div>
+                <div class="row"> 
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="username" class="col-form-label">Username:</label>
+                    <input type="text" class="form-control" id="username">
+                    </div>               
+                    </div>  
+                </div>
+                <div class="row"> 
+                    <div class="col-lg-9">
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                    <label for="clave" class="col-form-label">Clave:</label>
+                    <input type="password" class="form-control form-control-date" id="clave">
                     </div>
                     </div> 
+                    </div>    
                 </div>
-                
                               
             </div>
             <div class="modal-footer">
@@ -177,7 +196,7 @@ if($_SESSION['rol'] != 1){
 <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../assets/datatables/datatables.min.js"></script>  
 
-<script type="text/javascript" src="aulas.js"></script> 
+<script type="text/javascript" src="padres.js"></script> 
 
 </body>
 </html>

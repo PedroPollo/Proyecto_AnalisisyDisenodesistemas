@@ -48,6 +48,7 @@ if(isset($_SESSION['rol'])){
     <li><a class="dropdown-item active" href="login.php">Administrador</a></li>
     <li><a class="dropdown-item" href="loginprof.php">Profesor</a></li>
     <li><a class="dropdown-item" href="loginalum.php">Estudiante</a></li>
+    <li><a class="dropdown-item" href="loginpadre.php">Padre</a></li>
   </ul>
 </div>
   </nav>

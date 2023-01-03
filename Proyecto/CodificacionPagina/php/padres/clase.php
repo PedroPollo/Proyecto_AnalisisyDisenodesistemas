@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if($_SESSION['rol'] != 2){
+if($_SESSION['rol'] != 4){
   header('location: ../../index.php');
 }
 $user = $_SESSION['n'];
@@ -16,11 +16,12 @@ $user = $_SESSION['n'];
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
     <?php
 $conexion = mysqli_connect("localhost","root","","proyecto");
-$sql = "SELECT profesor.nombre FROM `profesor` WHERE profesor_id = '$user'";
+$sql = "SELECT padres.nombre FROM `padres` WHERE padres_id = '$user'";
 $resultado = mysqli_query($conexion,$sql);
 $row = mysqli_fetch_array($resultado);
 $prof = $row[0];
 mysqli_free_result($resultado);
+$alumno = $_GET["alumno"];
 ?>
     <title><?php echo $prof; ?></title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -46,10 +47,10 @@ mysqli_free_result($resultado);
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="indexmaestros.php">Pagina principal</a>
+            <a class="nav-link" aria-current="page" href="indexpadres.php">Pagina principal</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="clases.php">Clases</a>
+            <a class="nav-link active" aria-current="page" href="hijos.php">Hijos</a>
           </li>          
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="../../logout.php">Cerrar Sesion</a>
@@ -81,7 +82,7 @@ mysqli_free_result($resultado);
         </div>
         </header>
         <?php
-        $sql="SELECT alumnos.nombre_alumno, alumnos.cedula FROM alumnos,procesoalumno WHERE alumnos.alumno_id=procesoalumno.alumno_id AND procesoalumno.proceso_id='$clase';";
+        $sql="SELECT procesoprofesor.proceso_id,profesor.nombre,grados.nombre_grado,aulas.nombre_aula,materias.nombre_materia,periodos.nombre_periodo, alumnos.nombre_alumno FROM procesoprofesor,profesor,grados,aulas,materias,periodos,alumnos,procesoalumno WHERE alumnos.alumno_id=procesoalumno.alumno_id AND procesoprofesor.proceso_id=procesoalumno.proceso_id AND profesor.profesor_id = procesoprofesor.profesor_id AND grados.grado_id = procesoprofesor.grado_id AND aulas.aula_id = procesoprofesor.aula_id AND materias.materia_id = procesoprofesor.materia_id AND periodos.periodo_id = procesoprofesor.periodo_id AND procesoalumno.alumno_id = '$alumno';";
         $resultado = mysqli_query($conexion,$sql);
         ?>
 <div class="p-3 m-0 border-0 bd-example">
@@ -91,11 +92,14 @@ mysqli_free_result($resultado);
       ?>
         <div class="col-lg-3">
           <div class="card" style="width: 18rem;">
-          <img src="/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/rsc/user.png" class="card-img-top">
+          <img src="/Proyecto_AnalisisyDisenodesistemas/Proyecto/CodificacionPagina/rsc/image.png" class="card-img-top">
           <div class="card-body">
-              <h5 class="card-title"><?php echo $row[0] ?></h5>
-              <p>Cedula:<a class="btn btn-primary disabled" tabindex="-1" role="button" aria-disabled="true"><?php echo $row[1] ?></a><br>
+              <h5 class="card-title"><?php echo $row[4] ?></h5>
+              <p>Grado:<a class="btn btn-primary disabled" tabindex="-1" role="button" aria-disabled="true"><?php echo $row[2] ?></a><br>
+              Aula:<a class="btn btn-primary disabled" tabindex="-1" role="button" aria-disabled="true"><?php echo $row[3] ?></a>
+            Profesor: <?php echo $row[1] ?></p>
               <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="contenidos.php?alumno=<?php echo $alumno; ?>&clase=<?php echo $row[0]; ?>" type="button" class="btn btn-dark">Acceder</a>
               </div>
           </div>
           </div>
@@ -103,6 +107,5 @@ mysqli_free_result($resultado);
       <?php } ?>
      </div>
 </div>
-
 </body>
 </html>

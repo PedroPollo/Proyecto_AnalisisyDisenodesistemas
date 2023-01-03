@@ -50,6 +50,9 @@ if($_SESSION['rol'] != 1){
             <a class="nav-link" aria-current="page" href="alumnosadmin.php">Administrar Alumnos</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="padresadmin.php">Administrar Padres</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" aria-current="page" href="gradosadmin.php">Administrar Grados</a>
           </li>
           <li class="nav-item">
@@ -66,6 +69,9 @@ if($_SESSION['rol'] != 1){
           </li>
           <li class="nav-item">
             <a class="nav-link " aria-current="page" href="alumprofadadmin.php">Administrar Alumnos Profesores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="alumpadreadadmin.php">Administrar Padres-Alumnos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="../../logout.php">Cerrar Sesion</a>
