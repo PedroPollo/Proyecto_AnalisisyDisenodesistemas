@@ -82,7 +82,7 @@ $clase = $_GET["clase"];
         </div>
         </header>
         <?php
-        $sql="SELECT alumnos.nombre_alumno, alumnos.cedula,alumnos.alumno_id FROM alumnos,procesopadre WHERE alumnos.alumno_id=procesopadre.alumno_id;";
+        $sql="SELECT alumnos.nombre_alumno, alumnos.cedula,alumnos.alumno_id FROM alumnos,procesopadre WHERE alumnos.alumno_id=procesopadre.alumno_id AND procesopadre.padres_id = $user;";
         $resultado = mysqli_query($conexion,$sql);
         ?>
 <div class="p-3 m-0 border-0 bd-example">
